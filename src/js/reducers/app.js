@@ -5,10 +5,14 @@ import * as pages from '../constants/pages';
 const initialState = Map({
   currentPage: pages.LOGIN,
   loading: false,
+  showModal: false,
 });
 
 export default function test(state = initialState, action) {
   switch(action.type) {
+
+    case actionTypes.SET_SHOW_MODAL:
+      return state.set('showModal', action.showModal);
 
     case actionTypes.SET_CURRENT_PAGE:
       return state.set('currentPage', action.page);

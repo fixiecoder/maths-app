@@ -7,3 +7,7 @@ export function setCurrentPage(page) {
 export function setLoading(loading) {
   return { type: actionTypes.SET_LOADING, loading };
 }
+
+export function setShowModal(showModal) {
+  return { type: actionTypes.SET_SHOW_MODAL, showModal };
+}

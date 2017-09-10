@@ -4,7 +4,7 @@ build:
 	npm run prod
 
 syncfiles:
-	aws s3 sync ./dist s3://www.laylasmathsthingy.com --acl bucket-owner-full-control --acl public-read --profile s3
+	aws s3 sync ./dist s3://www.laylasmathsthingy.com --acl bucket-owner-full-control --acl public-read --cache-control="max-age=2592000" --profile s3
 
 invalidate:
 	aws cloudfront create-invalidation --distribution-id E2442G9F5YP549 --paths /index.html --profile cloudfront

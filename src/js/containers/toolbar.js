@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Menu from '../components/toolbar';
 import { logout } from '../actions/auth';
+import { setShowModal } from '../actions/app';
 
 function mapStateToProps(state) {
   return {
@@ -11,7 +12,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    logout: () => dispatch(logout())
+    setShowModal: (showModal) => dispatch(setShowModal(showModal)),
+    logout: () => dispatch(logout()),
   };
 }
 

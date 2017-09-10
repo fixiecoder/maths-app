@@ -21,7 +21,7 @@ export default class QuestionInput extends React.Component {
       bottom: 0,
       right: 0,
       borderRadius: 5,
-      textAlign: 'right',
+      textAlign: 'center',
       display: 'flex',
       alignItems: 'center'
     };

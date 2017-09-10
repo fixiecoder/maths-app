@@ -53,7 +53,7 @@ export default function Toolbar(props) {
       </div>
       <div className="main-toolbar-right">
         {questionMenuItems}
-        <button className="main-toolbar-logout-button" onClick={props.logout}>
+        <button className="main-toolbar-logout-button" onClick={() => props.setShowModal(true)}>
           <CloseIcon size={50} fill={'red'} />
         </button>
       </div>

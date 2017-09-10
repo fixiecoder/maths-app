@@ -3,7 +3,7 @@ import App from '../components/app';
 
 function mapStateToProps(state) {
   return {
-
+    showModal: state.getIn(['app', 'showModal'])
   };
 }
 
