@@ -19,7 +19,7 @@ export default function Toolbar(props) {
     case CHALLENGE_MENU:
     case PRACTICE_MENU:
       questionMenuItems = (
-        <div>
+        <div className="toolbar-menu-item">
           <Link to="/app/menu"><BackIcon size={50} fill={'green'} /></Link>
         </div>
       );
@@ -27,7 +27,7 @@ export default function Toolbar(props) {
 
     case PRACTICE_QUESTION:
       questionMenuItems = (
-        <div>
+        <div className="toolbar-menu-item">
           <Link to="/app/practice"><BackIcon size={50} fill={'green'} /></Link>
         </div>
       );
@@ -36,7 +36,7 @@ export default function Toolbar(props) {
     case COMPLETED_CHALLENGE:
     case CHALLENGE_QUESTION:
       questionMenuItems = (
-        <div>
+        <div className="toolbar-menu-item">
           <Link to="/app/challenge"><BackIcon size={50} fill={'green'} /></Link>
         </div>
       );

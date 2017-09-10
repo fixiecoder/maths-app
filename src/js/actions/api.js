@@ -22,6 +22,7 @@ const makeRequest = (uri, method, body) => (dispatch, getState) => new Promise((
 
   fetch(`${baseUrl}${uri}`, request)
     .then(response => {
+      console.log(response.ok)
       if(response.ok) {
         const contentType = response.headers.get('content-type');
         if(contentType === 'application/json') {
@@ -34,7 +35,9 @@ const makeRequest = (uri, method, body) => (dispatch, getState) => new Promise((
       }
     })
     .then(responseData => resolve(responseData))
-    .catch(e => reject(e));
+    .catch(e => {
+      reject(e)
+    });
 });
 
 export default {

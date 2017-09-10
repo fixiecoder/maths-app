@@ -2,6 +2,7 @@ import { Map } from 'immutable';
 import * as actionTypes from '../actions/types/auth';
 
 const initialState = Map({
+  loginError: '',
   tokenKey: '',
   tokenValue: '',
   user: null
@@ -12,6 +13,9 @@ export default function test(state = initialState, action) {
 
     case actionTypes.SET_USER:
       return state.set('user', action.user);
+
+    case actionTypes.SET_LOGIN_ERROR:
+      return state.set('loginError', action.loginError);
 
     case actionTypes.SET_AUTH_TOKENS:
       return state.set('tokenKey', action.authTokens.get('tokenKey'))

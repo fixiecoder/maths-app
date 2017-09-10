@@ -3,33 +3,33 @@ import titleImage from '../../assets/title_blue.svg';
 import Loading from './loading';
 
 const titleStyle = {
-  height: 200
+  // height: 200
 };
 
 const loginWrapperStyle = {
-  height: '100vh',
-  width: '100vw',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexDirection: 'column'
+  // height: '100vh',
+  // width: '100vw',
+  // display: 'flex',
+  // alignItems: 'center',
+  // justifyContent: 'center',
+  // flexDirection: 'column'
 };
 
 const loginFormStyle = {
-  height: 150,
-  width: 250,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  alignItems: 'center'
+  // height: 150,
+  // width: 250,
+  // display: 'flex',
+  // flexDirection: 'column',
+  // justifyContent: 'space-between',
+  // alignItems: 'center'
 };
 
 const loginInputStyle = {
-  height: 40,
-  width: '80%',
-  borderRadius: 6,
-  border: '2px solid #eee',
-  padding: 5
+  // height: 40,
+  // width: '80%',
+  // borderRadius: 6,
+  // border: '2px solid #eee',
+  // padding: 5
 };
 
 export default class Login extends React.PureComponent {
@@ -59,10 +59,11 @@ export default class Login extends React.PureComponent {
       return <Loading />;
     }
     return (
-      <div style={loginWrapperStyle}>
-        <img alt="" style={titleStyle} src={titleImage} />
-        <form style={loginFormStyle} onSubmit={this.submitLogin}>
+      <div className="login-wrapper" style={loginWrapperStyle}>
+        <img alt="" className="login-title-image" style={titleStyle} src={titleImage} />
+        <form className="login-form" style={loginFormStyle} onSubmit={this.submitLogin}>
           <input
+            className="login-input"
             style={loginInputStyle}
             value={this.state.username}
             type="text"
@@ -70,6 +71,7 @@ export default class Login extends React.PureComponent {
             onChange={(e) => this.onInputChange(e.target.name, e.target.value)}
           />
           <input
+            className="login-input"
             style={loginInputStyle}
             value={this.state.password}
             type="password"
@@ -78,6 +80,7 @@ export default class Login extends React.PureComponent {
           />
           <button className="login-button">Log in</button>
         </form>
+        <p className="login-page-error-message">{this.props.loginError}</p>
       </div>
     );
   }
