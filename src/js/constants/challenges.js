@@ -87,7 +87,7 @@ export default List([
     name: 'Basic addition',
     challengeId: 'easy-adding',
     includedTables: List(),
-    methods: List(['PLUS']),
+    methods: List(['ADD']),
     difficulty: 'EASY',
     history: List()
   }),
@@ -96,7 +96,7 @@ export default List([
     name: 'Medium addition',
     challengeId: 'medium-adding',
     includedTables: List(),
-    methods: List(['PLUS']),
+    methods: List(['ADD']),
     difficulty: 'MEDUIUM',
     history: List()
   }),
@@ -105,7 +105,7 @@ export default List([
     name: 'Hard addition',
     challengeId: 'hard-adding',
     includedTables: List(),
-    methods: List(['PLUS']),
+    methods: List(['ADD']),
     difficulty: 'HARD',
     history: List()
   })

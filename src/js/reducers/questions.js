@@ -13,8 +13,8 @@ const initialState = Map({
       method: methods.MULTIPLY,
       included: true
     }),
-    [methods.PLUS]: Map({
-      method: methods.PLUS,
+    [methods.ADD]: Map({
+      method: methods.ADD,
       included: false
     })
   }),

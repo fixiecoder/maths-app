@@ -1,13 +1,13 @@
 export const MULTIPLY = 'MULTIPLY';
 export const DIVIDE = 'DIVIDE';
-export const PLUS = 'PLUS';
+export const ADD = 'ADD';
 export const MINUS = 'MINUS';
 export const ALL = 'ALL';
 
 export const methodsList = [
   MULTIPLY,
   DIVIDE,
-  PLUS,
+  ADD,
   MINUS,
   ALL
 ];
@@ -15,6 +15,6 @@ export const methodsList = [
 export const methodSymbols = {
   MULTIPLY: 'x',
   DIVIDE: '/',
-  PLUS: '+',
+  ADD: '+',
   MINUS: '-',
 };

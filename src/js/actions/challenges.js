@@ -57,6 +57,7 @@ export const initChallenge = (challenge) => dispatch => {
   });
 
   const currentChallenge = Map({
+    difficulty: challenge.get('difficulty'),
     startTime: Date.now(),
     challengeId: challenge.get('challengeId'),
     questionCount: challenge.get('questionCount'),

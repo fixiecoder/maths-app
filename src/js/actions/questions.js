@@ -8,7 +8,7 @@ import {
 import * as actionTypes from './types/questions';
 import {
   MULTIPLY,
-  PLUS,
+  ADD,
   MINUS,
   DIVIDE
 } from '../constants/methods';
@@ -102,13 +102,15 @@ export const generateQuestion = () => (dispatch, getState) => {
     dispatch({ type: removeFactorActionType, table: table.get('key'), factor, factorType });
   }
 
+  // if(method === SUBTRACT)
+
   let answer;
   switch(method) {
     case MULTIPLY:
       answer = qValue1 * qValue2;
       break;
 
-    case PLUS:
+    case ADD:
       answer = qValue1 + qValue2;
       break;
 
@@ -122,7 +124,7 @@ export const generateQuestion = () => (dispatch, getState) => {
 
     default:
       answer = qValue1 + qValue2;
-      method = PLUS;
+      method = ADD;
       break;
   }
 

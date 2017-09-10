@@ -8,7 +8,7 @@ import { PRACTICE } from '../constants/game-types';
 
 const symbolMap = {
   MULTIPLY: 'x',
-  PLUS: '+',
+  ADD: '+',
   MINUS: '-',
 };
 
