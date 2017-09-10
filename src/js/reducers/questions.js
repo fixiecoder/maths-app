@@ -83,8 +83,8 @@ export default function questions(state = initialState, action) {
     case actionTypes.SET_CURRENT_QUESTION:
       return state.set('current', action.question);
 
-    // case actionTypes.SET_DIFFICULTY:
-    //   return state.set('difficulty', action.difficulty);
+    case actionTypes.SET_DIFFICULTY:
+      return state.set('difficulty', action.difficulty);
 
     case actionTypes.SET_GAME_TYPE:
       return state.set('gameType', action.gameType);

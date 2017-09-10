@@ -34,7 +34,7 @@ export default class Practices extends React.PureComponent {
   }
 
   startPractice() {
-    this.props.initPractice('EASY', this.state.methods, this.state.tables);
+    this.props.initPractice(this.props.difficulty, this.state.methods, this.state.tables);
   }
 
   componentDidMount() {
