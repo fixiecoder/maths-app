@@ -4,29 +4,31 @@
   padding-left: 20px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
-
-  .main-toolbar-spacer {
+  .main-toolbar-left {
     flex: 1;
+
+    .main-toolbar-title {
+      max-width: 200px;
+    }
   }
 
-  .main-toolbar-title {
-    height: 100%;
-    flex: 1;
-    max-width: 200px;
-  }
+  .main-toolbar-right {
+    display: flex;
 
-  .toolbar-menu-item {
-    
-  }
+    .toolbar-menu-item {
+      
+    }
 
-  .main-toolbar-logout-button {
-    width: 50px;
-    margin: 0 10px;
-    background-color: rgba(0,0,0,0);
-    border: none;
-    outline: none;
-    cursor: pointer;
+    .main-toolbar-logout-button {
+      width: 50px;
+      margin: 0 10px;
+      background-color: rgba(0,0,0,0);
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
   }
 
 }

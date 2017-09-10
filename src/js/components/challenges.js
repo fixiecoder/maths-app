@@ -36,7 +36,7 @@ export default class Challenges extends React.PureComponent {
     return (
       <div className="challenges-wrapper">
         <h2>Challenges</h2>
-        <div className="challenges-inner drop-shaddow">
+        <div className="challenges-inner">
           {challenges}
         </div>
       </div>

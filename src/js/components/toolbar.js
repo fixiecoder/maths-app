@@ -48,12 +48,15 @@ export default function Toolbar(props) {
 
   return (
     <div className="main-toolbar">
-      <img className="main-toolbar-title" src={titleWhiteImage} alt="" />
-      <div className="main-toolbar-spacer"></div>
-      {questionMenuItems}
-      <button className="main-toolbar-logout-button" onClick={props.logout}>
-        <CloseIcon size={50} fill={'red'} />
-      </button>
+      <div className="main-toolbar-left">
+        <img className="main-toolbar-title" src={titleWhiteImage} alt="" />
+      </div>
+      <div className="main-toolbar-right">
+        {questionMenuItems}
+        <button className="main-toolbar-logout-button" onClick={props.logout}>
+          <CloseIcon size={50} fill={'red'} />
+        </button>
+      </div>
     </div>
   );
 }

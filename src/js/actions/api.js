@@ -22,7 +22,6 @@ const makeRequest = (uri, method, body) => (dispatch, getState) => new Promise((
 
   fetch(`${baseUrl}${uri}`, request)
     .then(response => {
-      console.log(response.ok)
       if(response.ok) {
         const contentType = response.headers.get('content-type');
         if(contentType === 'application/json') {

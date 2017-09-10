@@ -2,36 +2,6 @@ import React from 'react';
 import titleImage from '../../assets/title_blue.svg';
 import Loading from './loading';
 
-const titleStyle = {
-  // height: 200
-};
-
-const loginWrapperStyle = {
-  // height: '100vh',
-  // width: '100vw',
-  // display: 'flex',
-  // alignItems: 'center',
-  // justifyContent: 'center',
-  // flexDirection: 'column'
-};
-
-const loginFormStyle = {
-  // height: 150,
-  // width: 250,
-  // display: 'flex',
-  // flexDirection: 'column',
-  // justifyContent: 'space-between',
-  // alignItems: 'center'
-};
-
-const loginInputStyle = {
-  // height: 40,
-  // width: '80%',
-  // borderRadius: 6,
-  // border: '2px solid #eee',
-  // padding: 5
-};
-
 export default class Login extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -59,12 +29,11 @@ export default class Login extends React.PureComponent {
       return <Loading />;
     }
     return (
-      <div className="login-wrapper" style={loginWrapperStyle}>
-        <img alt="" className="login-title-image" style={titleStyle} src={titleImage} />
-        <form className="login-form" style={loginFormStyle} onSubmit={this.submitLogin}>
+      <div className="login-wrapper">
+        <img alt="" className="login-title-image" src={titleImage} />
+        <form className="login-form" onSubmit={this.submitLogin}>
           <input
             className="login-input"
-            style={loginInputStyle}
             value={this.state.username}
             type="text"
             name="username"
@@ -72,7 +41,6 @@ export default class Login extends React.PureComponent {
           />
           <input
             className="login-input"
-            style={loginInputStyle}
             value={this.state.password}
             type="password"
             name="password"
