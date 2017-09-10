@@ -1,0 +1,15 @@
+.main-toolbar {
+  min-height: 100px;
+  background-color: lightblue;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.main-toolbar-spacer {
+  flex: 1;
+}
+
+.main-toolbar-title {
+  height: 100%;
+}

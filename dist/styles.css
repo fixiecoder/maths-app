@@ -1,0 +1,222 @@
+.drop-shaddow {
+  -webkit-box-shadow: 2px 3px 76px -16px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 3px 76px -16px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 3px 76px -16px rgba(0, 0, 0, 0.75); }
+
+* {
+  box-sizing: border-box; }
+
+.disabled {
+  pointer-events: none; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  overflow-x: hidden;
+  width: 100vw;
+  height: 100vh; }
+
+.menu-play-buttons-wrapper {
+  display: flex;
+  flex: 1; }
+
+.menu-play-buttons {
+  flex: 1;
+  background-color: lightgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.menu-play-button {
+  border: 5px solid red;
+  border-radius: 10px;
+  flex-basis: 200px;
+  height: 200px;
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  font-size: 2em; }
+
+.menu-play-button:hover {
+  background-color: white; }
+
+.main-toolbar-logout-button {
+  margin: 0 10px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer; }
+
+.login-button {
+  outline: none;
+  border-radius: 6px;
+  background-color: mistyrose;
+  border: 2px solid pink;
+  height: 40px;
+  width: 60%;
+  cursor: pointer; }
+
+.login-button:hover {
+  border: 2px solid mistyrose;
+  background-color: pink;
+  color: white; }
+
+.difficulty-button {
+  background-color: white;
+  color: black;
+  transition: background-color 0.5s ease, color 0.5s ease; }
+
+.difficulty-button:hover {
+  background-color: black;
+  color: white; }
+
+.app-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column; }
+
+.practice-menu-wrapper {
+  text-align: center; }
+
+.practice-menu-heading {
+  margin: 0;
+  padding: 30px 0;
+  background-color: blue;
+  color: white; }
+
+.difficulty-heading {
+  padding-top: 20px;
+  margin: 0; }
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1000;
+  background-color: #8a39d6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }
+
+.loading-text {
+  margin: 0;
+  padding: 0; }
+
+.table-picker-wrapper {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: mistyrose;
+  transition: height 0.3s ease; }
+
+.table-picker-inner {
+  display: flex;
+  justify-content: center;
+  width: 100%; }
+
+.table-picker-table-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.table-picker-table-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; }
+
+.table-picker-table-label-text {
+  font-size: 2em;
+  color: green; }
+
+.table-picker-table-label-input {
+  width: 64px;
+  cursor: pointer; }
+
+.methods-picker-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+  background-color: lightblue; }
+
+.methods-picker-inner {
+  display: flex;
+  justify-content: center;
+  width: 100%; }
+
+.methods-picker-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 5px; }
+
+.methods-picker-label-text {
+  font-size: 2em;
+  color: green; }
+
+.method-picker-label-input {
+  width: 100px;
+  cursor: pointer; }
+
+.main-toolbar {
+  min-height: 100px;
+  background-color: lightblue;
+  padding-left: 20px;
+  display: flex;
+  align-items: center; }
+
+.main-toolbar-spacer {
+  flex: 1; }
+
+.main-toolbar-title {
+  height: 100%; }
+
+.challenges-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+.challenges-inner {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 500px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px; }
+
+.challenges-item {
+  padding: 5px;
+  flex: 1;
+  flex-basis: 100px;
+  border: 1px solid;
+  height: 100px;
+  margin: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  border: 4px solid mistyrose;
+  border-radius: 7px;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  transition: background-color 1s ease, border 0.5s ease, color 1s ease;
+  flex-direction: column; }
+
+.challenges-item:hover {
+  color: purple;
+  border: 4px solid pink;
+  background-color: mistyrose; }

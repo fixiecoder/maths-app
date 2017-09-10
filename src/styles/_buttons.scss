@@ -1,0 +1,66 @@
+.menu-play-buttons-wrapper {
+  display: flex;
+  flex: 1;
+}
+
+.menu-play-buttons {
+  flex: 1;
+  background-color: lightgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-play-button {
+  border: 5px solid red;
+  border-radius: 10px;
+  flex-basis: 200px;
+  height: 200px;
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  font-size: 2em;
+}
+
+.menu-play-button:hover {
+  background-color: white;
+}
+
+.main-toolbar-logout-button {
+  margin: 0 10px;
+  background-color: rgba(0,0,0,0);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.login-button {
+  outline: none;
+  border-radius: 6px;
+  background-color: mistyrose;
+  border: 2px solid pink;
+  height: 40px;
+  width: 60%;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  border: 2px solid mistyrose;
+  background-color: pink;
+  color: white;
+}
+
+.difficulty-button {
+  background-color: white;
+  color: black;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.difficulty-button:hover {
+  background-color: black;
+  color: white;
+}

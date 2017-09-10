@@ -1,0 +1,8 @@
+export const LOGIN = 'LOGIN';
+export const QUESTION = 'QUESTION';
+export const CHALLENGE_QUESTION = 'CHALLENGE_QUESTION';
+export const PRACTICE_QUESTION = 'PRACTICE_QUESTION';
+export const MENU = 'MENU';
+export const PRACTICE_MENU = 'PRACTICE_MENU';
+export const CHALLENGE_MENU = 'CHALLENGE_MENU';
+export const COMPLETED_CHALLENGE = 'COMPLETED_CHALLENGE';
