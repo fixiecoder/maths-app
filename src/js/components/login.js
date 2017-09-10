@@ -36,8 +36,8 @@ export default class Login extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'amy',
-      password: 'password2',
+      username: '',
+      password: '',
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.submitLogin = this.submitLogin.bind(this);

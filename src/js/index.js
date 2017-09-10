@@ -15,6 +15,8 @@ import store from './store';
 
 import '../styles/index.scss';
 import '../html/robots.txt';
+import '../html/favicon.ico';
+import '../html/mathsfavicon.ico';
 
 function requireNoAuth(mextState, replace, callback) {
   const loggedIn = store.getState().getIn(['auth', 'tokenValue']);

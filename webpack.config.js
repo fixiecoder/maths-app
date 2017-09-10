@@ -93,13 +93,13 @@ module.exports = {
         ]
       },
       {
-        test: /robots\.txt$/,
+        test: /\.(txt|ico)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
               context: 'src',
-              name: 'robots.txt'
+              name: '[name].[ext]'
             }  
           }
         ]
