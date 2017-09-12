@@ -6,7 +6,8 @@ import { setShowModal } from '../actions/app';
 function mapStateToProps(state) {
   return {
     methods: state.getIn(['questions', 'methods']),
-    currentPage: state.getIn(['app', 'currentPage'])
+    currentPage: state.getIn(['app', 'currentPage']),
+    user: state.get('user'),
   };
 }
 

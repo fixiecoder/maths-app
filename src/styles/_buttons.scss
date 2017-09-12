@@ -5,14 +5,15 @@
 
 .menu-play-buttons {
   flex: 1;
-  background-color: lightgreen;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .menu-play-button {
-  border: 5px solid red;
+  color: #fff;
+  background-color: #2174b7;
+  border: 5px solid #ffc882;
   border-radius: 10px;
   flex-basis: 200px;
   height: 100px;
@@ -22,12 +23,14 @@
   align-items: center;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease, color 0.5s ease, border 0.5s ease;
   font-size: 2em;
 }
 
 .menu-play-button:hover {
   background-color: white;
+  color: black;
+  border: 7px solid #ffa632;
 }
 
 .login-button {

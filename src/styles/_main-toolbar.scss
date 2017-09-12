@@ -18,7 +18,9 @@
     display: flex;
 
     .toolbar-menu-item {
-      
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
     }
 
     .main-toolbar-logout-button {

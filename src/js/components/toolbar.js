@@ -46,12 +46,17 @@ export default function Toolbar(props) {
       questionMenuItems = undefined;
   }
 
+  console.log(props)
+
   return (
     <div className="main-toolbar">
       <div className="main-toolbar-left">
         <img className="main-toolbar-title" src={titleWhiteImage} alt="" />
       </div>
       <div className="main-toolbar-right">
+        <div>
+          <p>Hi {props.user.get('name')}</p>
+        </div>
         {questionMenuItems}
         <button className="main-toolbar-logout-button" onClick={() => props.setShowModal(true)}>
           <CloseIcon size={50} fill={'red'} />
