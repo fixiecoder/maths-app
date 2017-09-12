@@ -11,9 +11,9 @@
 }
 
 .menu-play-button {
-  color: #fff;
-  background-color: #2174b7;
   border: 5px solid #ffc882;
+  background-color: white;
+  color: black;
   border-radius: 10px;
   flex-basis: 200px;
   height: 100px;
@@ -28,8 +28,8 @@
 }
 
 .menu-play-button:hover {
-  background-color: white;
-  color: black;
+  color: #fff;
+  background-color: #2174b7;
   border: 7px solid #ffa632;
 }
 
