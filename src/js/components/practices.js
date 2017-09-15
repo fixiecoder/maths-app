@@ -4,7 +4,7 @@ import TablePicker from '../containers/table-picker';
 import DifficultyPicker from '../containers/difficulty-picker';
 import MethodPicker from '../containers/method-picker';
 import { PRACTICE_MENU } from '../constants/pages';
-import { MULTIPLY, ADD, MINUS } from '../constants/methods';
+import { MULTIPLY, ADD, SUBTRACT } from '../constants/methods';
 
 export default class Practices extends React.PureComponent {
   constructor(props) {
@@ -16,7 +16,7 @@ export default class Practices extends React.PureComponent {
       methods: Map({
         MULTIPLY: Map({ included: false, method: MULTIPLY }),
         ADD: Map({ included: false, method: ADD }),
-        MINUS: Map({ included: false, method: MINUS }),
+        SUBTRACT: Map({ included: false, method: SUBTRACT }),
       }),
       tables: Map({
         one: Map({ included: false, value: 1, key: 'one' }),

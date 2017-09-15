@@ -46,8 +46,6 @@ export default function Toolbar(props) {
       questionMenuItems = undefined;
   }
 
-  console.log(props)
-
   return (
     <div className="main-toolbar">
       <div className="main-toolbar-left">

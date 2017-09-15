@@ -1,7 +1,7 @@
 import React from 'react';
 import checkboxCheckedImageSrc from '../../assets/checkbox_checked.svg';
 import checkboxUncheckedImageSrc from '../../assets/checkbox_unchecked.svg';
-import { MULTIPLY, ADD, MINUS, methodSymbols } from '../constants/methods';
+import { MULTIPLY, ADD, SUBTRACT, methodSymbols } from '../constants/methods';
 
 export default function MethodPicker(props) {
 
@@ -37,17 +37,17 @@ export default function MethodPicker(props) {
           />
         </label>
         <label className="methods-picker-label">
-          <span className="methods-picker-label-text">{methodSymbols[MINUS]}</span>
+          <span className="methods-picker-label-text">{methodSymbols[SUBTRACT]}</span>
           <img
             alt=""
             className="method-picker-label-input"
-            src={props.methods.getIn([MINUS, 'included']) ? checkboxCheckedImageSrc : checkboxUncheckedImageSrc}
+            src={props.methods.getIn([SUBTRACT, 'included']) ? checkboxCheckedImageSrc : checkboxUncheckedImageSrc}
           />
           <input
             hidden={true}
             type='checkbox'
-            checked={props.methods.getIn([MINUS, 'included'])}
-            onChange={() => props.setMethod(MINUS, !props.methods.getIn([MINUS, 'included'])) }
+            checked={props.methods.getIn([SUBTRACT, 'included'])}
+            onChange={() => props.setMethod(SUBTRACT, !props.methods.getIn([SUBTRACT, 'included'])) }
           />
         </label>
       </div>

@@ -9,7 +9,7 @@ import * as actionTypes from './types/questions';
 import {
   MULTIPLY,
   ADD,
-  MINUS,
+  SUBTRACT,
   DIVIDE
 } from '../constants/methods';
 import * as statusTypes from '../constants/question-status';
@@ -23,22 +23,22 @@ import { REMOVE_CHALLENGE_FACTOR, RESET_CHALLENGE_FACTOR } from './types/challen
 import * as difficulties from '../constants/difficulty-types';
 import { PRACTICE, CHALLENGE } from '../constants/game-types';
 import { endChallenge } from './challenges';
+import store from '../store';
 
 export const setChallengeHistory = (challengeHistory) => {
   return { type: actionTypes.SET_CHALLENGE_HISTORY, challengeHistory };
 };
 
-export const generateQuestion = () => (dispatch, getState) => {
-  const gameType = getState().getIn(['questions', 'gameType']);
+function getQuestionReducer() {
+  const gameType = store.getState().getIn(['questions', 'gameType']);
   const isPractice = gameType === PRACTICE;
-  const reducer = isPractice === true ? 'practice' : 'challenge';
-  const methods = getState().getIn([reducer, 'methods']).toList();
-  let method = methods.get(getRandomNumberBetween(0, methods.size - 1)).get('method');
-  const difficulty = getState().getIn([reducer, 'difficulty']);
-  let includedTablesList = getState().getIn([reducer, 'includedTables']).toList();
-  if(gameType === CHALLENGE) {
-    includedTablesList = getState().getIn([reducer, 'includedTables']).toList();
-  }
+  return isPractice === true ? 'practice' : 'challenge';
+}
+
+function generateMultiplicationQuestion(difficulty) {
+  const isPractice = reducer === 'practice';
+  const reducer = getQuestionReducer();
+  const includedTablesList = store.getState().getIn([reducer, 'includedTables']).toList();
 
   const tableIndex = getRandomNumberBetween(0, includedTablesList.size - 1);
   let table = includedTablesList.get(tableIndex);
@@ -46,32 +46,24 @@ export const generateQuestion = () => (dispatch, getState) => {
   let qValue1;
   let qValue2;
 
-  let addSubractRangeLimit = 20;
-  if(difficulty === difficulties.MEDIUM) {
-    addSubractRangeLimit = 100;
-  } else if(difficulty === difficulties.HARD) {
-    addSubractRangeLimit = 999;
-  }
-
   let refreshTable = false;
   const resetFactorActonType = isPractice ? RESET_PRACTICE_FACTOR : RESET_CHALLENGE_FACTOR;
 
   if(table) {
     if(table.getIn(['factors', 'qV2']).size === 0) {
-      dispatch({ type: resetFactorActonType, factorType: 'qV2', table: table.get('key') });
+      store.dispatch({ type: resetFactorActonType, factorType: 'qV2', table: table.get('key') });
       refreshTable = true;
     }
 
     if(table.getIn(['factors', 'qV1']).size === 0) {
-      dispatch({ type: resetFactorActonType, factorType: 'qV1', table: table.get('key') });
+      store.dispatch({ type: resetFactorActonType, factorType: 'qV1', table: table.get('key') });
       refreshTable = true;
     }
 
     if(refreshTable === true) {
-      table = getState().getIn([reducer, 'includedTables', table.get('key')]);
+      table = store.getState().getIn([reducer, 'includedTables', table.get('key')]);
     }
   }
-
 
   let customType;
   let factor;
@@ -80,64 +72,104 @@ export const generateQuestion = () => (dispatch, getState) => {
   if(Math.random() > 0.5) {
     customType = [TYPE1, TYPE3][getRandomNumberBetween(0, 1)];
     const val2Index = table ? getRandomNumberBetween(0, table.getIn(['factors', 'qV2']).size - 1) : 0;
-    qValue1 = method === MULTIPLY ?
-      table.get('value') : getRandomNumberBetween(0, addSubractRangeLimit);
-    qValue2 = method === MULTIPLY ?
-      table.getIn(['factors', 'qV2', val2Index]) : getRandomNumberBetween(0, addSubractRangeLimit);
+    qValue1 = table.get('value');
+    qValue2 = table.getIn(['factors', 'qV2', val2Index]);
     factor = qValue2;
     factorType = 'qV2';
   } else {
     customType = [TYPE1, TYPE2][getRandomNumberBetween(0, 1)];
     const val1Index = table ? getRandomNumberBetween(0, table.getIn(['factors', 'qV1']).size - 1) : 0;
-    qValue1 = method === MULTIPLY ?
-      table.getIn(['factors', 'qV1', val1Index]) : getRandomNumberBetween(0, addSubractRangeLimit);
-    qValue2 = method === MULTIPLY ?
-      table.get('value') : getRandomNumberBetween(0, addSubractRangeLimit);
+    qValue1 = table.getIn(['factors', 'qV1', val1Index]);
+    qValue2 = table.get('value');
     factor = qValue1;
     factorType = 'qV1';
   }
 
-  if(method === MULTIPLY) {
-    const removeFactorActionType = isPractice === true ? REMOVE_PRACTICE_FACTOR : REMOVE_CHALLENGE_FACTOR;
-    dispatch({ type: removeFactorActionType, table: table.get('key'), factor, factorType });
-  }
+  const removeFactorActionType = isPractice === true ? REMOVE_PRACTICE_FACTOR : REMOVE_CHALLENGE_FACTOR;
+  store.dispatch({ type: removeFactorActionType, table: table.get('key'), factor, factorType });
 
-  // if(method === SUBTRACT)
-
-  let answer;
-  switch(method) {
-    case MULTIPLY:
-      answer = qValue1 * qValue2;
-      break;
-
-    case ADD:
-      answer = qValue1 + qValue2;
-      break;
-
-    case MINUS:
-      answer = qValue1 - qValue2;
-      break;
-
-    case DIVIDE:
-      answer = qValue1 / qValue2;
-      break;
-
-    default:
-      answer = qValue1 + qValue2;
-      method = ADD;
-      break;
-  }
-
-  const question = Map({
+  const answer = qValue1 * qValue2;
+  return Map({
     questionRef: uuid.v4(),
     qValue1,
     qValue2,
-    method,
+    method: MULTIPLY,
     answer,
     startTime: Date.now(),
     questionType: difficulty === difficulties.EASY ? TYPE1 : customType,
     status: statusTypes.UNANSWERED,
   });
+}
+
+function generateAdditionQuesion(difficulty) {
+  let addSubractRangeLimit = 20;
+  if(difficulty === difficulties.MEDIUM) {
+    addSubractRangeLimit = 100;
+  } else if(difficulty === difficulties.HARD) {
+    addSubractRangeLimit = 999;
+  }
+  const customType = [TYPE1, TYPE3][getRandomNumberBetween(0, 1)];
+  const reducer = getQuestionReducer(); 
+  const qValue1 = getRandomNumberBetween(0, addSubractRangeLimit);
+  const qValue2 = getRandomNumberBetween(0, addSubractRangeLimit);
+  const answer = qValue1 + qValue2;
+  return Map({
+    questionRef: uuid.v4(),
+    qValue1,
+    qValue2,
+    method: ADD,
+    answer,
+    startTime: Date.now(),
+    questionType: difficulty === difficulties.EASY ? TYPE1 : customType,
+    status: statusTypes.UNANSWERED,
+  }); 
+}
+
+function generateSubtractionQuesion(difficulty) {
+  let addSubractRangeLimit = 20;
+  if(difficulty === difficulties.MEDIUM) {
+    addSubractRangeLimit = 100;
+  } else if(difficulty === difficulties.HARD) {
+    addSubractRangeLimit = 999;
+  }
+  const customType = [TYPE1, TYPE3][getRandomNumberBetween(0, 1)];
+  const reducer = getQuestionReducer(); 
+  const qValue1 = getRandomNumberBetween(0, addSubractRangeLimit);
+  const qValue2 = getRandomNumberBetween(0, addSubractRangeLimit);
+  const answer = qValue1 + qValue2;
+  return Map({
+    questionRef: uuid.v4(),
+    qValue1,
+    qValue2,
+    method: SUBTRACT,
+    answer,
+    startTime: Date.now(),
+    questionType: difficulty === difficulties.EASY ? TYPE1 : customType,
+    status: statusTypes.UNANSWERED,
+  }); 
+}
+
+export const generateQuestion = () => (dispatch, getState) => {
+  const reducer = getQuestionReducer();
+  const methods = getState().getIn([reducer, 'methods']).toList();
+  let method = methods.get(getRandomNumberBetween(0, methods.size - 1)).get('method');
+  const difficulty = getState().getIn([reducer, 'difficulty']);
+
+  let question;
+  switch(method) {
+    case MULTIPLY:
+      question = generateMultiplicationQuestion(difficulty);
+      break;
+
+    case ADD:
+      question = generateAdditionQuesion(difficulty);
+      break;
+
+    case SUBTRACT:
+      question = generateSubtractionQuesion(difficulty);
+      break;
+
+  }
 
   dispatch({ type: actionTypes.SET_CURRENT_QUESTION, question });
 };

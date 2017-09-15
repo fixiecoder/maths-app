@@ -9,7 +9,7 @@ import { PRACTICE } from '../constants/game-types';
 const symbolMap = {
   MULTIPLY: 'x',
   ADD: '+',
-  MINUS: '-',
+  SUBTRACT: '-',
 };
 
 const styles = {

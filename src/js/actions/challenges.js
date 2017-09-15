@@ -28,8 +28,7 @@ export const getChallengeHistory = (lastDateCreated = 0) => (dispatch, getState)
 
 export const uploadChallengeToHistory = (challenge) => (dispatch, getState) => {
   const userId = getState().getIn(['user', 'id']);
-  dispatch(API.post(`/user/${userId}/history`, challenge.toJS()))
-    .then(res => console.warn(JSON.stringify(res, null, '  ')));
+  return dispatch(API.post(`/user/${userId}/history`, challenge.toJS()));
 };
 
 export const setChallenge = challenge => dispatch => {
