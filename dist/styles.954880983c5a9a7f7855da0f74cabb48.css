@@ -258,6 +258,13 @@ const loginInputStyle = {
   width: 100px;
   cursor: pointer; }
 
+.question-number-structure-wrapper .question-number-structure-question {
+  display: flex;
+  justify-content: space-between; }
+  .question-number-structure-wrapper .question-number-structure-question .question-number-structure-question-part {
+    flex-basis: 40px;
+    border: 1px solid red; }
+
 .main-toolbar {
   min-height: 100px;
   background-color: lightblue;
@@ -322,4 +329,4 @@ const loginInputStyle = {
   border: 4px solid pink;
   background-color: mistyrose; }
 
-/*# sourceMappingURL=styles.f8493478d11a12f7c2f45a4e56dd6a45.css.map*/
+/*# sourceMappingURL=styles.954880983c5a9a7f7855da0f74cabb48.css.map*/

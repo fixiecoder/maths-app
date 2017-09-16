@@ -14,10 +14,10 @@ import {
 } from '../constants/methods';
 import * as statusTypes from '../constants/question-status';
 import {
-  TYPE1,
-  TYPE2,
-  TYPE3
-} from '../constants/question-types';
+  FORMAT1,
+  FORMAT2,
+  FORMAT3
+} from '../constants/question-formats';
 import { REMOVE_PRACTICE_FACTOR, RESET_PRACTICE_FACTOR } from './types/practice';
 import { REMOVE_CHALLENGE_FACTOR, RESET_CHALLENGE_FACTOR } from './types/challenge';
 import * as difficulties from '../constants/difficulty-types';
@@ -70,14 +70,14 @@ function generateMultiplicationQuestion(difficulty) {
   let factorType;
 
   if(Math.random() > 0.5) {
-    customType = [TYPE1, TYPE3][getRandomNumberBetween(0, 1)];
+    customType = [FORMAT1, FORMAT3][getRandomNumberBetween(0, 1)];
     const val2Index = table ? getRandomNumberBetween(0, table.getIn(['factors', 'qV2']).size - 1) : 0;
     qValue1 = table.get('value');
     qValue2 = table.getIn(['factors', 'qV2', val2Index]);
     factor = qValue2;
     factorType = 'qV2';
   } else {
-    customType = [TYPE1, TYPE2][getRandomNumberBetween(0, 1)];
+    customType = [FORMAT1, FORMAT2][getRandomNumberBetween(0, 1)];
     const val1Index = table ? getRandomNumberBetween(0, table.getIn(['factors', 'qV1']).size - 1) : 0;
     qValue1 = table.getIn(['factors', 'qV1', val1Index]);
     qValue2 = table.get('value');
@@ -96,7 +96,7 @@ function generateMultiplicationQuestion(difficulty) {
     method: MULTIPLY,
     answer,
     startTime: Date.now(),
-    questionType: difficulty === difficulties.EASY ? TYPE1 : customType,
+    questionType: difficulty === difficulties.EASY ? FORMAT1 : customType,
     status: statusTypes.UNANSWERED,
   });
 }
@@ -108,7 +108,7 @@ function generateAdditionQuesion(difficulty) {
   } else if(difficulty === difficulties.HARD) {
     addSubractRangeLimit = 999;
   }
-  const customType = [TYPE1, TYPE3][getRandomNumberBetween(0, 1)];
+  const customType = [FORMAT1, FORMAT3][getRandomNumberBetween(0, 1)];
   const reducer = getQuestionReducer(); 
   const qValue1 = getRandomNumberBetween(0, addSubractRangeLimit);
   const qValue2 = getRandomNumberBetween(0, addSubractRangeLimit);
@@ -120,7 +120,7 @@ function generateAdditionQuesion(difficulty) {
     method: ADD,
     answer,
     startTime: Date.now(),
-    questionType: difficulty === difficulties.EASY ? TYPE1 : customType,
+    questionType: difficulty === difficulties.EASY ? FORMAT1 : customType,
     status: statusTypes.UNANSWERED,
   }); 
 }
@@ -132,7 +132,7 @@ function generateSubtractionQuesion(difficulty) {
   } else if(difficulty === difficulties.HARD) {
     addSubractRangeLimit = 999;
   }
-  const customType = [TYPE1, TYPE3][getRandomNumberBetween(0, 1)];
+  const customType = [FORMAT1, FORMAT3][getRandomNumberBetween(0, 1)];
   const reducer = getQuestionReducer(); 
   const qValue1 = getRandomNumberBetween(0, addSubractRangeLimit);
   const qValue2 = getRandomNumberBetween(0, addSubractRangeLimit);
@@ -144,7 +144,7 @@ function generateSubtractionQuesion(difficulty) {
     method: SUBTRACT,
     answer,
     startTime: Date.now(),
-    questionType: difficulty === difficulties.EASY ? TYPE1 : customType,
+    questionType: difficulty === difficulties.EASY ? FORMAT1 : customType,
     status: statusTypes.UNANSWERED,
   }); 
 }
@@ -192,15 +192,15 @@ export const answerQuestion = (question, answer) => (dispatch, getState) => {
   const currentQuestion = getState().getIn([reducer, 'currentQuestion']);
   const questionCount = getState().getIn([reducer, 'questionCount']);
   switch(question.get('questionType')) {
-    case TYPE1:
+    case FORMAT1:
       status = question.get('answer') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
       break;
 
-    case TYPE2:
+    case FORMAT2:
       status = question.get('qValue1') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
       break;
 
-    case TYPE3:
+    case FORMAT3:
       status = question.get('qValue2') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
       break;
 

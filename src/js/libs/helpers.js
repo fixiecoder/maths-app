@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { questionTypesList } from '../constants/question-types';
+import { questionFormatsList } from '../constants/question-formats';
 import { methodsList } from '../constants/methods';
 import correctMessages from '../constants/correct-messages';
 import incorrectMessages from '../constants/incorrect-messages';
@@ -9,8 +9,8 @@ export function getRandomNumberBetween(lower, upper) {
 }
 
 export function getRandomType() {
-  const typeIndex = getRandomNumberBetween(0, questionTypesList.length - 1);
-  return questionTypesList[typeIndex];
+  const typeIndex = getRandomNumberBetween(0, questionFormatsList.length - 1);
+  return questionFormatsList[typeIndex];
 }
 
 export function getRandomMethod() {

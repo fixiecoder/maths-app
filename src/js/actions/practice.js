@@ -4,6 +4,7 @@ import * as actionTypes from './types/practice';
 import { setGameType } from './questions';
 import { PRACTICE } from '../constants/game-types';
 import { TABLES } from '../constants/tables';
+import { THREE_PART_EQUATION } from '../constants/question-types';
 
 export const setPractice = (practice) => dispatch => {
   dispatch({ type: actionTypes.SET_PRACTICE, practice });

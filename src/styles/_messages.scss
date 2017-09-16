@@ -1,0 +1,69 @@
+.messages-wrapper {
+  position: fixed;
+  border: 1px dotted grey;
+  width: 260px;
+  top: $main-toolbar-height;
+  height: calc(100% - #{$main-toolbar-height});
+  right: 0;
+  z-index: 100;
+  background-color: #fff;
+  font-size: 0.9em;
+
+  .messages-input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .messages-input {
+      height: 80px;
+      margin: 10px 0;
+      width: 80%;
+      resize: none;
+      padding: 5px;
+      font-size: 1.2em;
+    }
+
+    .messages-input-send {
+      border-radius: 50%;
+      border: none;
+      height: 40px;
+      background-color: green;
+      color: white;
+      transition: background-color 0.2s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        background-color: lightgreen;
+      }
+    }
+  }
+
+  .messages-list {
+    margin: 0;
+    padding: 0;
+    height: calc(100% - 100px);
+    list-style: none;
+    overflow: auto;
+
+    .messages-list-item {
+      position: relative;
+      width: 88%;
+      padding: 5px;
+      border-radius: 5px;
+
+      .message-from-name {
+        font-size: 0.8em;
+      }
+    }
+
+    .message-from-me {
+      margin: 15px 2px 15px 10%;
+      background-color: lightgreen;
+    }
+
+    .message-from-them {
+      background-color: mistyrose;
+      margin: 15px 10px 15px 2%;
+    }
+  }
+}

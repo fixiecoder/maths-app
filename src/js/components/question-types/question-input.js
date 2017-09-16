@@ -1,5 +1,5 @@
 import React from 'react';
-import * as statusTypes from '../constants/question-status';
+import * as statusTypes from '../../constants/question-status';
 
 export default class QuestionInput extends React.Component {
   componentDidMount() {

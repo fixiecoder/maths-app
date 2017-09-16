@@ -1,122 +1,5 @@
 webpackJsonp([0],{
 
-/***/ "+H0k":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__("U7vG");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _questionStatus = __webpack_require__("FRYN");
-
-var statusTypes = _interopRequireWildcard(_questionStatus);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var QuestionInput = function (_React$Component) {
-  _inherits(QuestionInput, _React$Component);
-
-  function QuestionInput() {
-    _classCallCheck(this, QuestionInput);
-
-    return _possibleConstructorReturn(this, (QuestionInput.__proto__ || Object.getPrototypeOf(QuestionInput)).apply(this, arguments));
-  }
-
-  _createClass(QuestionInput, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.answerInput.focus();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var inputStyle = {
-        fontSize: 50,
-        minWidth: 60,
-        width: '100%',
-        color: 'black',
-        outline: 'none',
-        border: '4px solid blue',
-        height: '100%',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        borderRadius: 5,
-        textAlign: 'center',
-        display: 'flex',
-        alignItems: 'center'
-      };
-
-      var spacerStyle = {
-        position: 'relative',
-        color: 'white',
-        display: 'inline-block',
-        alignItems: 'center',
-        minWidth: 50,
-        fontSize: 60,
-        paddingRight: 20,
-        paddingLeft: 20,
-        letterSpacing: 1.5
-      };
-
-      if (this.props.question.get('status') === statusTypes.CORRECT) {
-        inputStyle.border = '4px solid green';
-      } else if (this.props.question.get('status') === statusTypes.INCORRECT) {
-        inputStyle.border = '4px solid red';
-      }
-
-      return _react2.default.createElement(
-        'label',
-        { style: { height: '100%', display: 'inline-block' } },
-        _react2.default.createElement(
-          'span',
-          { style: spacerStyle },
-          this.props.value || '#',
-          _react2.default.createElement('input', {
-            ref: function ref(input) {
-              _this2.answerInput = input;
-            },
-            type: 'number',
-            style: inputStyle,
-            value: this.props.value,
-            onChange: function onChange(e) {
-              return _this2.props.onChange(e.target.value);
-            },
-            placeholder: '?'
-          })
-        )
-      );
-    }
-  }]);
-
-  return QuestionInput;
-}(_react2.default.Component);
-
-exports.default = QuestionInput;
-
-/***/ }),
-
 /***/ "+KdC":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -638,11 +521,7 @@ module.exports = ReactNodeTypes;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var TYPE1 = exports.TYPE1 = 'TYPE1';
-var TYPE2 = exports.TYPE2 = 'TYPE2';
-var TYPE3 = exports.TYPE3 = 'TYPE3';
-
-var questionTypesList = exports.questionTypesList = [TYPE1, TYPE2, TYPE3];
+var THREE_PART_EQUATION = exports.THREE_PART_EQUATION = 'THREE_PART_EQUATION';
 
 /***/ }),
 
@@ -980,6 +859,53 @@ function questions() {
       return state;
   }
 }
+
+/***/ }),
+
+/***/ "09V7":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _app = __webpack_require__("M2BK");
+
+var _reactRedux = __webpack_require__("RH2O");
+
+var _threePartEquation = __webpack_require__("214G");
+
+var _threePartEquation2 = _interopRequireDefault(_threePartEquation);
+
+var _questions = __webpack_require__("KCRx");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function mapStateToProps(state) {
+  return {
+    question: state.getIn(['questions', 'current']),
+    gameType: state.getIn(['questions', 'gameType'])
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    generateQuestion: function generateQuestion() {
+      return dispatch((0, _questions.generateQuestion)());
+    },
+    answerQuestion: function answerQuestion(question, answer) {
+      return dispatch((0, _questions.answerQuestion)(question, answer));
+    },
+    setCurrentPage: function setCurrentPage(page) {
+      return dispatch((0, _app.setCurrentPage)(page));
+    }
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_threePartEquation2.default);
 
 /***/ }),
 
@@ -1564,8 +1490,6 @@ function Toolbar(props) {
       questionMenuItems = undefined;
   }
 
-  console.log(props);
-
   return _react2.default.createElement(
     'div',
     { className: 'main-toolbar' },
@@ -1598,6 +1522,266 @@ function Toolbar(props) {
     )
   );
 }
+
+/***/ }),
+
+/***/ "214G":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__("U7vG");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _questionFormats = __webpack_require__("2Ht5");
+
+var _questionStatus = __webpack_require__("FRYN");
+
+var _questionInput = __webpack_require__("URHy");
+
+var _questionInput2 = _interopRequireDefault(_questionInput);
+
+var _stats = __webpack_require__("4uNf");
+
+var _stats2 = _interopRequireDefault(_stats);
+
+var _pages = __webpack_require__("L6dv");
+
+var _gameTypes = __webpack_require__("Q7k0");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var symbolMap = {
+  MULTIPLY: 'x',
+  ADD: '+',
+  SUBTRACT: '-'
+};
+
+var styles = {
+  symbol: {
+    height: '100%',
+    fontSize: 60,
+    margin: 5,
+    display: 'flex'
+  },
+
+  value: {
+    height: '100%',
+    display: 'flex',
+    fontSize: 60,
+    margin: 5
+  }
+};
+
+var buttonsWrapper = {
+  display: 'flex',
+  justifyContent: 'center'
+};
+
+var button = {
+  borderRadius: 5,
+  outline: 'none',
+  height: 50,
+  width: 100,
+  margin: 10,
+  backgroundColor: 'white'
+};
+
+var answerButtonStyle = Object.assign({}, button, {
+  border: '4px solid green'
+});
+
+var nextQuestionButtonStyle = Object.assign({}, button, {
+  border: '4px solid blue'
+});
+
+var wrapperStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-around'
+};
+
+var messageStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  height: 40
+};
+
+var speedStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  height: 40
+};
+
+var ThreePartEquation = function (_React$Component) {
+  _inherits(ThreePartEquation, _React$Component);
+
+  function ThreePartEquation(props) {
+    _classCallCheck(this, ThreePartEquation);
+
+    var _this = _possibleConstructorReturn(this, (ThreePartEquation.__proto__ || Object.getPrototypeOf(ThreePartEquation)).call(this, props));
+
+    _this.answerChange = _this.answerChange.bind(_this);
+    _this.state = {
+      answer: ''
+    };
+    return _this;
+  }
+
+  _createClass(ThreePartEquation, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.generateQuestion();
+      var screen = this.props.gameType === _gameTypes.PRACTICE ? _pages.PRACTICE_QUESTION : _pages.CHALLENGE_QUESTION;
+      this.props.setCurrentPage(screen);
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.question && this.props.question.get('questionRef') !== prevProps.question.get('questionRef')) {
+        this.setState({
+          answer: ''
+        });
+      }
+    }
+  }, {
+    key: 'answerChange',
+    value: function answerChange(value) {
+      this.setState({
+        answer: value
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var result = this.props.question.get('status') === _questionStatus.CORRECT ? 'correctly' : 'incorrectly';
+      var val1 = this.props.question.get('questionType') === _questionFormats.FORMAT2 ? _react2.default.createElement(_questionInput2.default, { value: this.state.answer, onChange: this.answerChange, question: this.props.question }) : _react2.default.createElement(
+        'span',
+        { style: styles.value },
+        this.props.question.get('qValue1')
+      );
+
+      var val2 = this.props.question.get('questionType') === _questionFormats.FORMAT3 ? _react2.default.createElement(_questionInput2.default, { value: this.state.answer, onChange: this.answerChange, question: this.props.question }) : _react2.default.createElement(
+        'span',
+        { style: styles.value },
+        this.props.question.get('qValue2')
+      );
+
+      var answer = this.props.question.get('questionType') === _questionFormats.FORMAT1 ? _react2.default.createElement(_questionInput2.default, { value: this.state.answer, onChange: this.answerChange, question: this.props.question }) : _react2.default.createElement(
+        'span',
+        { style: styles.value },
+        this.props.question.get('answer')
+      );
+
+      return _react2.default.createElement(
+        'div',
+        { style: { display: 'flex', flexDirection: 'column' } },
+        _react2.default.createElement(
+          'form',
+          { onSubmit: function onSubmit(e) {
+              e.preventDefault();
+              if (_this2.props.question.get('status') === _questionStatus.UNANSWERED) {
+                _this2.props.answerQuestion(_this2.props.question, _this2.state.answer);
+              } else {
+                _this2.props.generateQuestion();
+              }
+            }, style: wrapperStyle },
+          _react2.default.createElement(
+            'div',
+            { style: { display: 'flex', alignItems: 'center' } },
+            val1,
+            _react2.default.createElement(
+              'span',
+              { style: styles.symbol },
+              symbolMap[this.props.question.get('method')]
+            ),
+            val2,
+            _react2.default.createElement(
+              'span',
+              { style: styles.symbol },
+              '='
+            ),
+            answer
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { style: messageStyle },
+          _react2.default.createElement(
+            'p',
+            null,
+            this.props.question.get('message')
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { style: buttonsWrapper },
+          _react2.default.createElement(
+            'button',
+            {
+              style: this.props.question.get('status') === _questionStatus.UNANSWERED ? answerButtonStyle : Object.assign({}, answerButtonStyle, {
+                border: '4px solid lightgrey',
+                color: 'lightgrey'
+              }),
+              disabled: this.props.question.get('status') !== _questionStatus.UNANSWERED,
+              type: 'button',
+              onClick: function onClick() {
+                return _this2.props.answerQuestion(_this2.props.question, _this2.state.answer);
+              }
+            },
+            'Check my answer'
+          ),
+          _react2.default.createElement(
+            'button',
+            {
+              style: this.props.question.get('status') !== _questionStatus.UNANSWERED ? nextQuestionButtonStyle : Object.assign({}, nextQuestionButtonStyle, {
+                border: '4px solid lightgrey',
+                color: 'lightgrey'
+              }),
+              disabled: this.props.question.get('status') === _questionStatus.UNANSWERED,
+              onClick: this.props.generateQuestion
+            },
+            'Next Question'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { style: speedStyle },
+          this.props.question.get('status') !== _questionStatus.UNANSWERED ? _react2.default.createElement(
+            'span',
+            null,
+            'You answered in ',
+            result,
+            ' ',
+            (this.props.question.get('duration') / 1000).toFixed(1),
+            ' seconds'
+          ) : null
+        ),
+        _react2.default.createElement(_stats2.default, null)
+      );
+    }
+  }]);
+
+  return ThreePartEquation;
+}(_react2.default.Component);
+
+exports.default = ThreePartEquation;
 
 /***/ }),
 
@@ -1871,6 +2055,23 @@ function escapeTextContentForBrowser(text) {
 }
 
 module.exports = escapeTextContentForBrowser;
+
+/***/ }),
+
+/***/ "2Ht5":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var FORMAT1 = exports.FORMAT1 = 'FORMAT1';
+var FORMAT2 = exports.FORMAT2 = 'FORMAT2';
+var FORMAT3 = exports.FORMAT3 = 'FORMAT3';
+
+var questionFormatsList = exports.questionFormatsList = [FORMAT1, FORMAT2, FORMAT3];
 
 /***/ }),
 
@@ -12613,16 +12814,16 @@ Object.defineProperty(exports, "__esModule", {
 var MULTIPLY = exports.MULTIPLY = 'MULTIPLY';
 var DIVIDE = exports.DIVIDE = 'DIVIDE';
 var ADD = exports.ADD = 'ADD';
-var MINUS = exports.MINUS = 'MINUS';
+var SUBTRACT = exports.SUBTRACT = 'SUBTRACT';
 var ALL = exports.ALL = 'ALL';
 
-var methodsList = exports.methodsList = [MULTIPLY, DIVIDE, ADD, MINUS, ALL];
+var methodsList = exports.methodsList = [MULTIPLY, DIVIDE, ADD, SUBTRACT, ALL];
 
 var methodSymbols = exports.methodSymbols = {
   MULTIPLY: 'x',
   DIVIDE: '/',
   ADD: '+',
-  MINUS: '-'
+  SUBTRACT: '-'
 };
 
 /***/ }),
@@ -13157,7 +13358,7 @@ var _lodash = __webpack_require__("M4fF");
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _questionTypes = __webpack_require__("/8pS");
+var _questionFormats = __webpack_require__("2Ht5");
 
 var _methods = __webpack_require__("ElFl");
 
@@ -13176,8 +13377,8 @@ function getRandomNumberBetween(lower, upper) {
 }
 
 function getRandomType() {
-  var typeIndex = getRandomNumberBetween(0, _questionTypes.questionTypesList.length - 1);
-  return _questionTypes.questionTypesList[typeIndex];
+  var typeIndex = getRandomNumberBetween(0, _questionFormats.questionFormatsList.length - 1);
+  return _questionFormats.questionFormatsList[typeIndex];
 }
 
 function getRandomMethod() {
@@ -13431,6 +13632,8 @@ var _questions = __webpack_require__("KCRx");
 var _gameTypes = __webpack_require__("Q7k0");
 
 var _tables = __webpack_require__("nM6G");
+
+var _questionTypes = __webpack_require__("/8pS");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -14051,254 +14254,30 @@ module.exports = exports['default'];
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+exports.default = Question;
 
 var _react = __webpack_require__("U7vG");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _questionTypes = __webpack_require__("/8pS");
+var _questionFormats = __webpack_require__("2Ht5");
 
-var _questionStatus = __webpack_require__("FRYN");
+var _threePartEquation = __webpack_require__("09V7");
 
-var _questionInput = __webpack_require__("+H0k");
+var _threePartEquation2 = _interopRequireDefault(_threePartEquation);
 
-var _questionInput2 = _interopRequireDefault(_questionInput);
+var _numberStructure = __webpack_require__("MFkf");
 
-var _stats = __webpack_require__("4uNf");
-
-var _stats2 = _interopRequireDefault(_stats);
-
-var _pages = __webpack_require__("L6dv");
-
-var _gameTypes = __webpack_require__("Q7k0");
+var _numberStructure2 = _interopRequireDefault(_numberStructure);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var symbolMap = {
-  MULTIPLY: 'x',
-  ADD: '+',
-  MINUS: '-'
-};
-
-var styles = {
-  symbol: {
-    height: '100%',
-    fontSize: 60,
-    margin: 5,
-    display: 'flex'
-  },
-
-  value: {
-    height: '100%',
-    display: 'flex',
-    fontSize: 60,
-    margin: 5
+function Question(props) {
+  switch (props.question.get('method')) {
+    default:
+      return _react2.default.createElement(_numberStructure2.default, null);
   }
-};
-
-var buttonsWrapper = {
-  display: 'flex',
-  justifyContent: 'center'
-};
-
-var button = {
-  borderRadius: 5,
-  outline: 'none',
-  height: 50,
-  width: 100,
-  margin: 10,
-  backgroundColor: 'white'
-};
-
-var answerButtonStyle = Object.assign({}, button, {
-  border: '4px solid green'
-});
-
-var nextQuestionButtonStyle = Object.assign({}, button, {
-  border: '4px solid blue'
-});
-
-var wrapperStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-around'
-};
-
-var messageStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  height: 40
-};
-
-var speedStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  height: 40
-};
-
-var Question = function (_React$Component) {
-  _inherits(Question, _React$Component);
-
-  function Question(props) {
-    _classCallCheck(this, Question);
-
-    var _this = _possibleConstructorReturn(this, (Question.__proto__ || Object.getPrototypeOf(Question)).call(this, props));
-
-    _this.answerChange = _this.answerChange.bind(_this);
-    _this.state = {
-      answer: ''
-    };
-    return _this;
-  }
-
-  _createClass(Question, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.generateQuestion();
-      var screen = this.props.gameType === _gameTypes.PRACTICE ? _pages.PRACTICE_QUESTION : _pages.CHALLENGE_QUESTION;
-      this.props.setCurrentPage(screen);
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
-      if (this.props.question && this.props.question.get('questionRef') !== prevProps.question.get('questionRef')) {
-        this.setState({
-          answer: ''
-        });
-      }
-    }
-  }, {
-    key: 'answerChange',
-    value: function answerChange(value) {
-      this.setState({
-        answer: value
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var result = this.props.question.get('status') === _questionStatus.CORRECT ? 'correctly' : 'incorrectly';
-      var val1 = this.props.question.get('questionType') === _questionTypes.TYPE2 ? _react2.default.createElement(_questionInput2.default, { value: this.state.answer, onChange: this.answerChange, question: this.props.question }) : _react2.default.createElement(
-        'span',
-        { style: styles.value },
-        this.props.question.get('qValue1')
-      );
-
-      var val2 = this.props.question.get('questionType') === _questionTypes.TYPE3 ? _react2.default.createElement(_questionInput2.default, { value: this.state.answer, onChange: this.answerChange, question: this.props.question }) : _react2.default.createElement(
-        'span',
-        { style: styles.value },
-        this.props.question.get('qValue2')
-      );
-
-      var answer = this.props.question.get('questionType') === _questionTypes.TYPE1 ? _react2.default.createElement(_questionInput2.default, { value: this.state.answer, onChange: this.answerChange, question: this.props.question }) : _react2.default.createElement(
-        'span',
-        { style: styles.value },
-        this.props.question.get('answer')
-      );
-
-      return _react2.default.createElement(
-        'div',
-        { style: { display: 'flex', flexDirection: 'column' } },
-        _react2.default.createElement(
-          'form',
-          { onSubmit: function onSubmit(e) {
-              e.preventDefault();
-              if (_this2.props.question.get('status') === _questionStatus.UNANSWERED) {
-                _this2.props.answerQuestion(_this2.props.question, _this2.state.answer);
-              } else {
-                _this2.props.generateQuestion();
-              }
-            }, style: wrapperStyle },
-          _react2.default.createElement(
-            'div',
-            { style: { display: 'flex', alignItems: 'center' } },
-            val1,
-            _react2.default.createElement(
-              'span',
-              { style: styles.symbol },
-              symbolMap[this.props.question.get('method')]
-            ),
-            val2,
-            _react2.default.createElement(
-              'span',
-              { style: styles.symbol },
-              '='
-            ),
-            answer
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { style: messageStyle },
-          _react2.default.createElement(
-            'p',
-            null,
-            this.props.question.get('message')
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { style: buttonsWrapper },
-          _react2.default.createElement(
-            'button',
-            {
-              style: this.props.question.get('status') === _questionStatus.UNANSWERED ? answerButtonStyle : Object.assign({}, answerButtonStyle, {
-                border: '4px solid lightgrey',
-                color: 'lightgrey'
-              }),
-              disabled: this.props.question.get('status') !== _questionStatus.UNANSWERED,
-              type: 'button',
-              onClick: function onClick() {
-                return _this2.props.answerQuestion(_this2.props.question, _this2.state.answer);
-              }
-            },
-            'Check my answer'
-          ),
-          _react2.default.createElement(
-            'button',
-            {
-              style: this.props.question.get('status') !== _questionStatus.UNANSWERED ? nextQuestionButtonStyle : Object.assign({}, nextQuestionButtonStyle, {
-                border: '4px solid lightgrey',
-                color: 'lightgrey'
-              }),
-              disabled: this.props.question.get('status') === _questionStatus.UNANSWERED,
-              onClick: this.props.generateQuestion
-            },
-            'Next Question'
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { style: speedStyle },
-          this.props.question.get('status') !== _questionStatus.UNANSWERED ? _react2.default.createElement(
-            'span',
-            null,
-            'You answered in ',
-            result,
-            ' ',
-            (this.props.question.get('duration') / 1000).toFixed(1),
-            ' seconds'
-          ) : null
-        ),
-        _react2.default.createElement(_stats2.default, null)
-      );
-    }
-  }]);
-
-  return Question;
-}(_react2.default.Component);
-
-exports.default = Question;
+}
 
 /***/ }),
 
@@ -14335,7 +14314,7 @@ var _questionStatus = __webpack_require__("FRYN");
 
 var statusTypes = _interopRequireWildcard(_questionStatus);
 
-var _questionTypes = __webpack_require__("/8pS");
+var _questionFormats = __webpack_require__("2Ht5");
 
 var _practice = __webpack_require__("J8Px");
 
@@ -14349,6 +14328,10 @@ var _gameTypes = __webpack_require__("Q7k0");
 
 var _challenges = __webpack_require__("x6zV");
 
+var _store = __webpack_require__("iyJi");
+
+var _store2 = _interopRequireDefault(_store);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -14357,112 +14340,148 @@ var setChallengeHistory = exports.setChallengeHistory = function setChallengeHis
   return { type: actionTypes.SET_CHALLENGE_HISTORY, challengeHistory: challengeHistory };
 };
 
+function getQuestionReducer() {
+  var gameType = _store2.default.getState().getIn(['questions', 'gameType']);
+  var isPractice = gameType === _gameTypes.PRACTICE;
+  return isPractice === true ? 'practice' : 'challenge';
+}
+
+function generateMultiplicationQuestion(difficulty) {
+  var isPractice = reducer === 'practice';
+  var reducer = getQuestionReducer();
+  var includedTablesList = _store2.default.getState().getIn([reducer, 'includedTables']).toList();
+
+  var tableIndex = (0, _helpers.getRandomNumberBetween)(0, includedTablesList.size - 1);
+  var table = includedTablesList.get(tableIndex);
+
+  var qValue1 = void 0;
+  var qValue2 = void 0;
+
+  var refreshTable = false;
+  var resetFactorActonType = isPractice ? _practice.RESET_PRACTICE_FACTOR : _challenge.RESET_CHALLENGE_FACTOR;
+
+  if (table) {
+    if (table.getIn(['factors', 'qV2']).size === 0) {
+      _store2.default.dispatch({ type: resetFactorActonType, factorType: 'qV2', table: table.get('key') });
+      refreshTable = true;
+    }
+
+    if (table.getIn(['factors', 'qV1']).size === 0) {
+      _store2.default.dispatch({ type: resetFactorActonType, factorType: 'qV1', table: table.get('key') });
+      refreshTable = true;
+    }
+
+    if (refreshTable === true) {
+      table = _store2.default.getState().getIn([reducer, 'includedTables', table.get('key')]);
+    }
+  }
+
+  var customType = void 0;
+  var factor = void 0;
+  var factorType = void 0;
+
+  if (Math.random() > 0.5) {
+    customType = [_questionFormats.FORMAT1, _questionFormats.FORMAT3][(0, _helpers.getRandomNumberBetween)(0, 1)];
+    var val2Index = table ? (0, _helpers.getRandomNumberBetween)(0, table.getIn(['factors', 'qV2']).size - 1) : 0;
+    qValue1 = table.get('value');
+    qValue2 = table.getIn(['factors', 'qV2', val2Index]);
+    factor = qValue2;
+    factorType = 'qV2';
+  } else {
+    customType = [_questionFormats.FORMAT1, _questionFormats.FORMAT2][(0, _helpers.getRandomNumberBetween)(0, 1)];
+    var val1Index = table ? (0, _helpers.getRandomNumberBetween)(0, table.getIn(['factors', 'qV1']).size - 1) : 0;
+    qValue1 = table.getIn(['factors', 'qV1', val1Index]);
+    qValue2 = table.get('value');
+    factor = qValue1;
+    factorType = 'qV1';
+  }
+
+  var removeFactorActionType = isPractice === true ? _practice.REMOVE_PRACTICE_FACTOR : _challenge.REMOVE_CHALLENGE_FACTOR;
+  _store2.default.dispatch({ type: removeFactorActionType, table: table.get('key'), factor: factor, factorType: factorType });
+
+  var answer = qValue1 * qValue2;
+  return (0, _immutable.Map)({
+    questionRef: _uuid2.default.v4(),
+    qValue1: qValue1,
+    qValue2: qValue2,
+    method: _methods.MULTIPLY,
+    answer: answer,
+    startTime: Date.now(),
+    questionType: difficulty === difficulties.EASY ? _questionFormats.FORMAT1 : customType,
+    status: statusTypes.UNANSWERED
+  });
+}
+
+function generateAdditionQuesion(difficulty) {
+  var addSubractRangeLimit = 20;
+  if (difficulty === difficulties.MEDIUM) {
+    addSubractRangeLimit = 100;
+  } else if (difficulty === difficulties.HARD) {
+    addSubractRangeLimit = 999;
+  }
+  var customType = [_questionFormats.FORMAT1, _questionFormats.FORMAT3][(0, _helpers.getRandomNumberBetween)(0, 1)];
+  var reducer = getQuestionReducer();
+  var qValue1 = (0, _helpers.getRandomNumberBetween)(0, addSubractRangeLimit);
+  var qValue2 = (0, _helpers.getRandomNumberBetween)(0, addSubractRangeLimit);
+  var answer = qValue1 + qValue2;
+  return (0, _immutable.Map)({
+    questionRef: _uuid2.default.v4(),
+    qValue1: qValue1,
+    qValue2: qValue2,
+    method: _methods.ADD,
+    answer: answer,
+    startTime: Date.now(),
+    questionType: difficulty === difficulties.EASY ? _questionFormats.FORMAT1 : customType,
+    status: statusTypes.UNANSWERED
+  });
+}
+
+function generateSubtractionQuesion(difficulty) {
+  var addSubractRangeLimit = 20;
+  if (difficulty === difficulties.MEDIUM) {
+    addSubractRangeLimit = 100;
+  } else if (difficulty === difficulties.HARD) {
+    addSubractRangeLimit = 999;
+  }
+  var customType = [_questionFormats.FORMAT1, _questionFormats.FORMAT3][(0, _helpers.getRandomNumberBetween)(0, 1)];
+  var reducer = getQuestionReducer();
+  var qValue1 = (0, _helpers.getRandomNumberBetween)(0, addSubractRangeLimit);
+  var qValue2 = (0, _helpers.getRandomNumberBetween)(0, addSubractRangeLimit);
+  var answer = qValue1 + qValue2;
+  return (0, _immutable.Map)({
+    questionRef: _uuid2.default.v4(),
+    qValue1: qValue1,
+    qValue2: qValue2,
+    method: _methods.SUBTRACT,
+    answer: answer,
+    startTime: Date.now(),
+    questionType: difficulty === difficulties.EASY ? _questionFormats.FORMAT1 : customType,
+    status: statusTypes.UNANSWERED
+  });
+}
+
 var generateQuestion = exports.generateQuestion = function generateQuestion() {
   return function (dispatch, getState) {
-    var gameType = getState().getIn(['questions', 'gameType']);
-    var isPractice = gameType === _gameTypes.PRACTICE;
-    var reducer = isPractice === true ? 'practice' : 'challenge';
+    var reducer = getQuestionReducer();
     var methods = getState().getIn([reducer, 'methods']).toList();
     var method = methods.get((0, _helpers.getRandomNumberBetween)(0, methods.size - 1)).get('method');
     var difficulty = getState().getIn([reducer, 'difficulty']);
-    var includedTablesList = getState().getIn([reducer, 'includedTables']).toList();
-    if (gameType === _gameTypes.CHALLENGE) {
-      includedTablesList = getState().getIn([reducer, 'includedTables']).toList();
-    }
 
-    var tableIndex = (0, _helpers.getRandomNumberBetween)(0, includedTablesList.size - 1);
-    var table = includedTablesList.get(tableIndex);
-
-    var qValue1 = void 0;
-    var qValue2 = void 0;
-
-    var addSubractRangeLimit = 20;
-    if (difficulty === difficulties.MEDIUM) {
-      addSubractRangeLimit = 100;
-    } else if (difficulty === difficulties.HARD) {
-      addSubractRangeLimit = 999;
-    }
-
-    var refreshTable = false;
-    var resetFactorActonType = isPractice ? _practice.RESET_PRACTICE_FACTOR : _challenge.RESET_CHALLENGE_FACTOR;
-
-    if (table) {
-      if (table.getIn(['factors', 'qV2']).size === 0) {
-        dispatch({ type: resetFactorActonType, factorType: 'qV2', table: table.get('key') });
-        refreshTable = true;
-      }
-
-      if (table.getIn(['factors', 'qV1']).size === 0) {
-        dispatch({ type: resetFactorActonType, factorType: 'qV1', table: table.get('key') });
-        refreshTable = true;
-      }
-
-      if (refreshTable === true) {
-        table = getState().getIn([reducer, 'includedTables', table.get('key')]);
-      }
-    }
-
-    var customType = void 0;
-    var factor = void 0;
-    var factorType = void 0;
-
-    if (Math.random() > 0.5) {
-      customType = [_questionTypes.TYPE1, _questionTypes.TYPE3][(0, _helpers.getRandomNumberBetween)(0, 1)];
-      var val2Index = table ? (0, _helpers.getRandomNumberBetween)(0, table.getIn(['factors', 'qV2']).size - 1) : 0;
-      qValue1 = method === _methods.MULTIPLY ? table.get('value') : (0, _helpers.getRandomNumberBetween)(0, addSubractRangeLimit);
-      qValue2 = method === _methods.MULTIPLY ? table.getIn(['factors', 'qV2', val2Index]) : (0, _helpers.getRandomNumberBetween)(0, addSubractRangeLimit);
-      factor = qValue2;
-      factorType = 'qV2';
-    } else {
-      customType = [_questionTypes.TYPE1, _questionTypes.TYPE2][(0, _helpers.getRandomNumberBetween)(0, 1)];
-      var val1Index = table ? (0, _helpers.getRandomNumberBetween)(0, table.getIn(['factors', 'qV1']).size - 1) : 0;
-      qValue1 = method === _methods.MULTIPLY ? table.getIn(['factors', 'qV1', val1Index]) : (0, _helpers.getRandomNumberBetween)(0, addSubractRangeLimit);
-      qValue2 = method === _methods.MULTIPLY ? table.get('value') : (0, _helpers.getRandomNumberBetween)(0, addSubractRangeLimit);
-      factor = qValue1;
-      factorType = 'qV1';
-    }
-
-    if (method === _methods.MULTIPLY) {
-      var removeFactorActionType = isPractice === true ? _practice.REMOVE_PRACTICE_FACTOR : _challenge.REMOVE_CHALLENGE_FACTOR;
-      dispatch({ type: removeFactorActionType, table: table.get('key'), factor: factor, factorType: factorType });
-    }
-
-    // if(method === SUBTRACT)
-
-    var answer = void 0;
+    var question = void 0;
     switch (method) {
       case _methods.MULTIPLY:
-        answer = qValue1 * qValue2;
+        question = generateMultiplicationQuestion(difficulty);
         break;
 
       case _methods.ADD:
-        answer = qValue1 + qValue2;
+        question = generateAdditionQuesion(difficulty);
         break;
 
-      case _methods.MINUS:
-        answer = qValue1 - qValue2;
+      case _methods.SUBTRACT:
+        question = generateSubtractionQuesion(difficulty);
         break;
 
-      case _methods.DIVIDE:
-        answer = qValue1 / qValue2;
-        break;
-
-      default:
-        answer = qValue1 + qValue2;
-        method = _methods.ADD;
-        break;
     }
-
-    var question = (0, _immutable.Map)({
-      questionRef: _uuid2.default.v4(),
-      qValue1: qValue1,
-      qValue2: qValue2,
-      method: method,
-      answer: answer,
-      startTime: Date.now(),
-      questionType: difficulty === difficulties.EASY ? _questionTypes.TYPE1 : customType,
-      status: statusTypes.UNANSWERED
-    });
 
     dispatch({ type: actionTypes.SET_CURRENT_QUESTION, question: question });
   };
@@ -14486,15 +14505,15 @@ var answerQuestion = exports.answerQuestion = function answerQuestion(question, 
     var currentQuestion = getState().getIn([reducer, 'currentQuestion']);
     var questionCount = getState().getIn([reducer, 'questionCount']);
     switch (question.get('questionType')) {
-      case _questionTypes.TYPE1:
+      case _questionFormats.FORMAT1:
         status = question.get('answer') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
         break;
 
-      case _questionTypes.TYPE2:
+      case _questionFormats.FORMAT2:
         status = question.get('qValue1') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
         break;
 
-      case _questionTypes.TYPE3:
+      case _questionFormats.FORMAT3:
         status = question.get('qValue2') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
         break;
 
@@ -32597,6 +32616,38 @@ var Subscription = function () {
 
 /***/ }),
 
+/***/ "MFkf":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _app = __webpack_require__("M2BK");
+
+var _reactRedux = __webpack_require__("RH2O");
+
+var _numberStructure = __webpack_require__("Xcgv");
+
+var _numberStructure2 = _interopRequireDefault(_numberStructure);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function mapStateToProps(state) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_numberStructure2.default);
+
+/***/ }),
+
 /***/ "MIAc":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34711,19 +34762,19 @@ function MethodPicker(props) {
         _react2.default.createElement(
           'span',
           { className: 'methods-picker-label-text' },
-          _methods.methodSymbols[_methods.MINUS]
+          _methods.methodSymbols[_methods.SUBTRACT]
         ),
         _react2.default.createElement('img', {
           alt: '',
           className: 'method-picker-label-input',
-          src: props.methods.getIn([_methods.MINUS, 'included']) ? _checkbox_checked2.default : _checkbox_unchecked2.default
+          src: props.methods.getIn([_methods.SUBTRACT, 'included']) ? _checkbox_checked2.default : _checkbox_unchecked2.default
         }),
         _react2.default.createElement('input', {
           hidden: true,
           type: 'checkbox',
-          checked: props.methods.getIn([_methods.MINUS, 'included']),
+          checked: props.methods.getIn([_methods.SUBTRACT, 'included']),
           onChange: function onChange() {
-            return props.setMethod(_methods.MINUS, !props.methods.getIn([_methods.MINUS, 'included']));
+            return props.setMethod(_methods.SUBTRACT, !props.methods.getIn([_methods.SUBTRACT, 'included']));
           }
         })
       )
@@ -36902,6 +36953,123 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 /***/ }),
 
+/***/ "URHy":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__("U7vG");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _questionStatus = __webpack_require__("FRYN");
+
+var statusTypes = _interopRequireWildcard(_questionStatus);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var QuestionInput = function (_React$Component) {
+  _inherits(QuestionInput, _React$Component);
+
+  function QuestionInput() {
+    _classCallCheck(this, QuestionInput);
+
+    return _possibleConstructorReturn(this, (QuestionInput.__proto__ || Object.getPrototypeOf(QuestionInput)).apply(this, arguments));
+  }
+
+  _createClass(QuestionInput, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.answerInput.focus();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var inputStyle = {
+        fontSize: 50,
+        minWidth: 60,
+        width: '100%',
+        color: 'black',
+        outline: 'none',
+        border: '4px solid blue',
+        height: '100%',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        borderRadius: 5,
+        textAlign: 'center',
+        display: 'flex',
+        alignItems: 'center'
+      };
+
+      var spacerStyle = {
+        position: 'relative',
+        color: 'white',
+        display: 'inline-block',
+        alignItems: 'center',
+        minWidth: 50,
+        fontSize: 60,
+        paddingRight: 20,
+        paddingLeft: 20,
+        letterSpacing: 1.5
+      };
+
+      if (this.props.question.get('status') === statusTypes.CORRECT) {
+        inputStyle.border = '4px solid green';
+      } else if (this.props.question.get('status') === statusTypes.INCORRECT) {
+        inputStyle.border = '4px solid red';
+      }
+
+      return _react2.default.createElement(
+        'label',
+        { style: { height: '100%', display: 'inline-block' } },
+        _react2.default.createElement(
+          'span',
+          { style: spacerStyle },
+          this.props.value || '#',
+          _react2.default.createElement('input', {
+            ref: function ref(input) {
+              _this2.answerInput = input;
+            },
+            type: 'number',
+            style: inputStyle,
+            value: this.props.value,
+            onChange: function onChange(e) {
+              return _this2.props.onChange(e.target.value);
+            },
+            placeholder: '?'
+          })
+        )
+      );
+    }
+  }]);
+
+  return QuestionInput;
+}(_react2.default.Component);
+
+exports.default = QuestionInput;
+
+/***/ }),
+
 /***/ "UVIB":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37750,6 +37918,57 @@ Object.defineProperty(exports, "__esModule", {
 var EASY = exports.EASY = 'EASY';
 var MEDIUM = exports.MEDIUM = 'MEDIUM';
 var HARD = exports.HARD = 'HARD';
+
+/***/ }),
+
+/***/ "Xcgv":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = NumberStructure;
+
+var _react = __webpack_require__("U7vG");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function NumberStructure(props) {
+
+  return _react2.default.createElement(
+    "div",
+    { className: "question-number-structure-wrapper" },
+    _react2.default.createElement(
+      "div",
+      { className: "question-number-structure-question" },
+      _react2.default.createElement(
+        "div",
+        { className: "question-number-structure-question-part" },
+        "1"
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "question-number-structure-question-part" },
+        "0"
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "question-number-structure-question-part" },
+        "2"
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "question-number-structure-question-part" },
+        "4"
+      )
+    )
+  );
+}
 
 /***/ }),
 
@@ -38861,40 +39080,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _app = __webpack_require__("M2BK");
-
 var _reactRedux = __webpack_require__("RH2O");
 
 var _question = __webpack_require__("Jzs1");
 
 var _question2 = _interopRequireDefault(_question);
 
-var _questions = __webpack_require__("KCRx");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function mapStateToProps(state) {
   return {
-    question: state.getIn(['questions', 'current']),
-    gameType: state.getIn(['questions', 'gameType'])
+    question: state.getIn(['questions', 'current'])
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    generateQuestion: function generateQuestion() {
-      return dispatch((0, _questions.generateQuestion)());
-    },
-    answerQuestion: function answerQuestion(question, answer) {
-      return dispatch((0, _questions.answerQuestion)(question, answer));
-    },
-    setCurrentPage: function setCurrentPage(page) {
-      return dispatch((0, _app.setCurrentPage)(page));
-    }
-  };
-}
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_question2.default);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(_question2.default);
 
 /***/ }),
 
@@ -43259,7 +43459,7 @@ var Practices = function (_React$PureComponent) {
       methods: (0, _immutable.Map)({
         MULTIPLY: (0, _immutable.Map)({ included: false, method: _methods.MULTIPLY }),
         ADD: (0, _immutable.Map)({ included: false, method: _methods.ADD }),
-        MINUS: (0, _immutable.Map)({ included: false, method: _methods.MINUS })
+        SUBTRACT: (0, _immutable.Map)({ included: false, method: _methods.SUBTRACT })
       }),
       tables: (0, _immutable.Map)({
         one: (0, _immutable.Map)({ included: false, value: 1, key: 'one' }),
@@ -50262,9 +50462,7 @@ var getChallengeHistory = exports.getChallengeHistory = function getChallengeHis
 var uploadChallengeToHistory = exports.uploadChallengeToHistory = function uploadChallengeToHistory(challenge) {
   return function (dispatch, getState) {
     var userId = getState().getIn(['user', 'id']);
-    dispatch(_api2.default.post('/user/' + userId + '/history', challenge.toJS())).then(function (res) {
-      return console.warn(JSON.stringify(res, null, '  '));
-    });
+    return dispatch(_api2.default.post('/user/' + userId + '/history', challenge.toJS()));
   };
 };
 
@@ -52257,4 +52455,4 @@ function symbolObservablePonyfill(root) {
 /***/ })
 
 },["vGYV"]);
-//# sourceMappingURL=main.c6a2c49a356c7c56ee1e.js.map
+//# sourceMappingURL=main.13a929de5fa160452de4.js.map

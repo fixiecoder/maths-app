@@ -1,0 +1,30 @@
+.question-number-structure-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .question-number-structure-question {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    .question-number-structure-question-part {
+      flex-basis: 50px;
+      font-size: 1.5em;
+      height: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      transition: background-color 0.2s ease-in-out, color 0.3s ease-in-out;
+      cursor: pointer;
+
+      &:hover, &.correct {
+        background-color: grey;
+        color: white;
+      }
+    }
+  }
+}
