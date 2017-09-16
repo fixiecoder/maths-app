@@ -3,6 +3,7 @@ import MessagesIndex from '../../components/messages';
 
 function mapStateToProps(state) {
   return {
+    open: state.getIn(['messages', 'open'])
   };
 }
 

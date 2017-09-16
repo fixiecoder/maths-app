@@ -10,8 +10,10 @@ class App extends React.Component {
       <div className="app-wrapper">
         {modal}
         <Toolbar />
-        <Messages />
-        {this.props.children}
+        <div className="main-content-wrapper">
+          {this.props.children}
+          <Messages />
+        </div>
       </div>
     );
   }

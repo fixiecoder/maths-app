@@ -11,6 +11,7 @@ import {
 } from '../constants/pages';
 import BackIcon from 'react-icons/lib/fa/arrow-circle-left';
 import CloseIcon from 'react-icons/lib/fa/close';
+import MessageIcon from 'react-icons/lib/fa/envelope';
 
 export default function Toolbar(props) {
   let questionMenuItems;
@@ -20,7 +21,7 @@ export default function Toolbar(props) {
     case PRACTICE_MENU:
       questionMenuItems = (
         <div className="toolbar-menu-item">
-          <Link to="/app/menu"><BackIcon size={50} fill={'green'} /></Link>
+          <Link to="/app/menu"><BackIcon size={50} fill={'#fff'} /></Link>
         </div>
       );
       break;
@@ -28,7 +29,7 @@ export default function Toolbar(props) {
     case PRACTICE_QUESTION:
       questionMenuItems = (
         <div className="toolbar-menu-item">
-          <Link to="/app/practice"><BackIcon size={50} fill={'green'} /></Link>
+          <Link to="/app/practice"><BackIcon size={50} fill={'#fff'} /></Link>
         </div>
       );
       break;
@@ -37,7 +38,7 @@ export default function Toolbar(props) {
     case CHALLENGE_QUESTION:
       questionMenuItems = (
         <div className="toolbar-menu-item">
-          <Link to="/app/challenge"><BackIcon size={50} fill={'green'} /></Link>
+          <Link to="/app/challenge"><BackIcon size={50} fill={'#fff'} /></Link>
         </div>
       );
       break;
@@ -52,8 +53,11 @@ export default function Toolbar(props) {
         <img className="main-toolbar-title" src={titleWhiteImage} alt="" />
       </div>
       <div className="main-toolbar-right">
-        <div>
+        <div className="toolbar-user">
           <p>Hi {props.user.get('name')}</p>
+        </div>
+        <div className="toolbar-messages" onClick={props.toggleMessagesOpen} >
+          <MessageIcon fill={'#fff'} size={30} />
         </div>
         {questionMenuItems}
         <button className="main-toolbar-logout-button" onClick={() => props.setShowModal(true)}>

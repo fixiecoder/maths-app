@@ -465,6 +465,36 @@ var logout = exports.logout = function logout() {
 
 /***/ }),
 
+/***/ "+yur":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__("RH2O");
+
+var _messages = __webpack_require__("ewD5");
+
+var _messages2 = _interopRequireDefault(_messages);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function mapStateToProps(state) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_messages2.default);
+
+/***/ }),
+
 /***/ "/762":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1442,6 +1472,10 @@ var _close = __webpack_require__("6Bnt");
 
 var _close2 = _interopRequireDefault(_close);
 
+var _envelope = __webpack_require__("VMLN");
+
+var _envelope2 = _interopRequireDefault(_envelope);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Toolbar(props) {
@@ -1456,7 +1490,7 @@ function Toolbar(props) {
         _react2.default.createElement(
           _reactRouter.Link,
           { to: '/app/menu' },
-          _react2.default.createElement(_arrowCircleLeft2.default, { size: 50, fill: 'green' })
+          _react2.default.createElement(_arrowCircleLeft2.default, { size: 50, fill: '#fff' })
         )
       );
       break;
@@ -1468,7 +1502,7 @@ function Toolbar(props) {
         _react2.default.createElement(
           _reactRouter.Link,
           { to: '/app/practice' },
-          _react2.default.createElement(_arrowCircleLeft2.default, { size: 50, fill: 'green' })
+          _react2.default.createElement(_arrowCircleLeft2.default, { size: 50, fill: '#fff' })
         )
       );
       break;
@@ -1481,7 +1515,7 @@ function Toolbar(props) {
         _react2.default.createElement(
           _reactRouter.Link,
           { to: '/app/challenge' },
-          _react2.default.createElement(_arrowCircleLeft2.default, { size: 50, fill: 'green' })
+          _react2.default.createElement(_arrowCircleLeft2.default, { size: 50, fill: '#fff' })
         )
       );
       break;
@@ -1503,13 +1537,18 @@ function Toolbar(props) {
       { className: 'main-toolbar-right' },
       _react2.default.createElement(
         'div',
-        null,
+        { className: 'toolbar-user' },
         _react2.default.createElement(
           'p',
           null,
           'Hi ',
           props.user.get('name')
         )
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'toolbar-messages' },
+        _react2.default.createElement(_envelope2.default, { fill: '#fff', size: 30 })
       ),
       questionMenuItems,
       _react2.default.createElement(
@@ -1691,7 +1730,7 @@ var ThreePartEquation = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { style: { display: 'flex', flexDirection: 'column' } },
+        { style: { display: 'flex', flexDirection: 'column', flex: 1 } },
         _react2.default.createElement(
           'form',
           { onSubmit: function onSubmit(e) {
@@ -4485,6 +4524,45 @@ function mapDispatchToProps(dispatch) {
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_modal2.default);
+
+/***/ }),
+
+/***/ "9wsG":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = challenges;
+
+var _immutable = __webpack_require__("BYKG");
+
+var _messages = __webpack_require__("eWwD");
+
+var actionTypes = _interopRequireWildcard(_messages);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var initialState = (0, _immutable.Map)({
+  open: false
+});
+
+function challenges() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+
+    case actionTypes.SET_MESSAGES_OPEN:
+      return state.set('open', !state.get('open'));
+
+    default:
+      return state;
+  }
+}
 
 /***/ }),
 
@@ -14275,7 +14353,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function Question(props) {
   switch (props.question.get('method')) {
     default:
-      return _react2.default.createElement(_numberStructure2.default, null);
+      return _react2.default.createElement(_threePartEquation2.default, null);
   }
 }
 
@@ -37100,6 +37178,10 @@ var _practice = __webpack_require__("eF1v");
 
 var _practice2 = _interopRequireDefault(_practice);
 
+var _messages = __webpack_require__("9wsG");
+
+var _messages2 = _interopRequireDefault(_messages);
+
 var _app = __webpack_require__("33c1");
 
 var _app2 = _interopRequireDefault(_app);
@@ -37114,6 +37196,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _reduxImmutable.combineReducers)({
   auth: _auth2.default,
+  messages: _messages2.default,
   challenges: _challenges2.default,
   challenge: _challenge2.default,
   practice: _practice2.default,
@@ -37502,6 +37585,45 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
   return selectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, options);
 }
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("W2nU")))
+
+/***/ }),
+
+/***/ "VMLN":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__("U7vG");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactIconBase = __webpack_require__("aSqn");
+
+var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FaEnvelope = function FaEnvelope(props) {
+    return _react2.default.createElement(
+        _reactIconBase2.default,
+        _extends({ viewBox: '0 0 40 40' }, props),
+        _react2.default.createElement(
+            'g',
+            null,
+            _react2.default.createElement('path', { d: 'm40 15.8v17.8q0 1.4-1 2.5t-2.6 1h-32.8q-1.5 0-2.6-1t-1-2.5v-17.8q1 1.1 2.3 2 8 5.5 11 7.7 1.3 0.9 2.1 1.5t2.1 1 2.5 0.6h0q1.2 0 2.5-0.6t2.1-1 2.1-1.5q3.7-2.8 11.1-7.7 1.2-0.9 2.2-1.9z m0-6.5q0 1.7-1.1 3.4t-2.7 2.7q-8.4 5.8-10.5 7.3-0.2 0.1-0.9 0.6t-1.2 0.9-1.2 0.7-1.3 0.6-1.1 0.2h0q-0.5 0-1.1-0.2t-1.3-0.6-1.2-0.7-1.2-0.9-0.9-0.6q-2.1-1.5-5.9-4.1t-4.6-3.2q-1.3-0.9-2.6-2.6t-1.2-3q0-1.8 0.9-2.9t2.7-1.2h32.8q1.5 0 2.5 1.1t1.1 2.5z' })
+        )
+    );
+};
+
+exports.default = FaEnvelope;
+module.exports = exports['default'];
 
 /***/ }),
 
@@ -37945,6 +38067,15 @@ function NumberStructure(props) {
     { className: "question-number-structure-wrapper" },
     _react2.default.createElement(
       "div",
+      null,
+      _react2.default.createElement(
+        "p",
+        null,
+        "Click on the number that represents the tens"
+      )
+    ),
+    _react2.default.createElement(
+      "div",
       { className: "question-number-structure-question" },
       _react2.default.createElement(
         "div",
@@ -37958,7 +38089,7 @@ function NumberStructure(props) {
       ),
       _react2.default.createElement(
         "div",
-        { className: "question-number-structure-question-part" },
+        { className: "question-number-structure-question-part correct" },
         "2"
       ),
       _react2.default.createElement(
@@ -39267,19 +39398,7 @@ module.exports = isTextInputElement;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var SET_CURRENT_QUESTION = exports.SET_CURRENT_QUESTION = 'SET_CURRENT_QUESTION';
-var REMOVE_FACTOR = exports.REMOVE_FACTOR = 'REMOVE_FACTOR';
-var SET_INCLUDED_TABLE = exports.SET_INCLUDED_TABLE = 'SET_INCLUDED_TABLE';
-var SET_INCLUDED_METHOD = exports.SET_INCLUDED_METHOD = 'SET_INCLUDED_METHOD';
-var SET_DIFFICULTY = exports.SET_DIFFICULTY = 'SET_DIFFICULTY';
-var RESET_FACTOR = exports.RESET_FACTOR = 'RESET_FACTOR';
-var ADD_QUESTION_TO_HISTORY = exports.ADD_QUESTION_TO_HISTORY = 'ADD_QUESTION_TO_HISTORY';
-var RESET_QUESTION_HISTORY = exports.RESET_QUESTION_HISTORY = 'RESET_QUESTION_HISTORY';
-var ADD_QUESTION_TO_CHALLENGE = exports.ADD_QUESTION_TO_CHALLENGE = 'ADD_QUESTION_TO_CHALLENGE';
-var SET_CURRENT_CHALLENGE = exports.SET_CURRENT_CHALLENGE = 'SET_CURRENT_CHALLENGE';
-var SET_GAME_TYPE = exports.SET_GAME_TYPE = 'SET_GAME_TYPE';
-var ADD_TO_CHALLENGE_HISTORY = exports.ADD_TO_CHALLENGE_HISTORY = 'ADD_TO_CHALLENGE_HISTORY';
-var SET_CHALLENGE_HISTORY = exports.SET_CHALLENGE_HISTORY = 'SET_CHALLENGE_HISTORY';
+var SET_MESSAGES_OPEN = exports.SET_MESSAGES_OPEN = 'SET_MESSAGES_OPEN';
 
 /***/ }),
 
@@ -41427,6 +41546,19 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 /***/ }),
 
+/***/ "eWwD":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var SET_MESSAGES_OPEN = exports.SET_MESSAGES_OPEN = 'SET_MESSAGES_OPEN';
+
+/***/ }),
+
 /***/ "ehig":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41781,6 +41913,157 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = ['That\'s right!', 'You are correct', 'Perfect answer!', 'Well done', 'Good job!', 'You are not wrong!', 'I\'m pleased to inform you that you are indeed correct'];
+
+/***/ }),
+
+/***/ "ewD5":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__("U7vG");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _immutable = __webpack_require__("BYKG");
+
+var _uuid = __webpack_require__("DlMc");
+
+var _uuid2 = _interopRequireDefault(_uuid);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MessagesIndex = function (_React$PureComponent) {
+  _inherits(MessagesIndex, _React$PureComponent);
+
+  function MessagesIndex(props) {
+    _classCallCheck(this, MessagesIndex);
+
+    var _this = _possibleConstructorReturn(this, (MessagesIndex.__proto__ || Object.getPrototypeOf(MessagesIndex)).call(this, props));
+
+    _this.scrollToBottom = _this.scrollToBottom.bind(_this);
+    _this.inputChange = _this.inputChange.bind(_this);
+    _this.sendMessage = _this.sendMessage.bind(_this);
+    _this.state = {
+      inputValue: '',
+      messages: (0, _immutable.fromJS)([{ id: 1, from: 'Layla', content: 'This is a message from me to someone else, it is not very long', me: true }, { id: 2, from: 'Daddy', content: 'Rich in heavy atoms two ghostly white figures in coveralls and helmets are soflty dancing quasar explorations', me: false }, { id: 3, from: 'Layla', content: 'This is a message from me to someone else, it is not very long', me: true }, { id: 4, from: 'Daddy', content: 'Rich in heavy atoms two ghostly white figures in coveralls and helmets are soflty dancing quasar explorations', me: false }, { id: 5, from: 'Layla', content: 'This is a message from me to someone else, it is not very long', me: true }, { id: 6, from: 'Daddy', content: 'Rich in heavy atoms two ghostly white figures in coveralls and helmets are soflty dancing quasar explorations', me: false }, { id: 7, from: 'Layla', content: 'This is a message from me to someone else, it is not very long', me: true }, { id: 8, from: 'Daddy', content: 'Rich in heavy atoms two ghostly white figures in coveralls and helmets are soflty dancing quasar explorations', me: false }, { id: 9, from: 'Layla', content: 'This is a message from me to someone else, it is not very long', me: true }, { id: 10, from: 'Daddy', content: 'Rich in heavy atoms two ghostly white figures in coveralls and helmets are soflty dancing quasar explorations', me: false }, { id: 11, from: 'Layla', content: 'This is a message from me to someone else, it is not very long', me: true }, { id: 12, from: 'Daddy', content: 'Rich in heavy atoms two ghostly white figures in coveralls and helmets are soflty dancing quasar explorations', me: false }, { id: 13, from: 'Layla', content: 'This is a message from me to someone else, it is not very long', me: true }, { id: 14, from: 'Daddy', content: 'Rich in heavy atoms two ghostly white figures in coveralls and helmets are soflty dancing quasar explorations', me: false }, { id: 15, from: 'Layla', content: 'This is a message from me to someone else, it is not very long', me: true }, { id: 16, from: 'Daddy', content: 'Rich in heavy atoms two ghostly white figures in coveralls and helmets are soflty dancing quasar explorations', me: false }])
+    };
+    return _this;
+  }
+
+  _createClass(MessagesIndex, [{
+    key: 'scrollToBottom',
+    value: function scrollToBottom() {
+      this.scrollList.scrollTop = this.scrollList.scrollHeight;
+    }
+  }, {
+    key: 'inputChange',
+    value: function inputChange(e) {
+      this.setState({ inputValue: e.target.value });
+    }
+  }, {
+    key: 'sendMessage',
+    value: function sendMessage() {
+      if (this.state.inputValue === '') {
+        return;
+      }
+
+      var message = (0, _immutable.Map)({
+        id: _uuid2.default.v4(),
+        from: 'Layla',
+        content: this.state.inputValue,
+        me: true
+      });
+
+      this.setState({
+        inputValue: '',
+        messages: this.state.messages.push(message)
+      });
+
+      this.inputElement.focus();
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.scrollToBottom();
+      this.inputElement.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          _this2.sendMessage();
+        }
+      });
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      this.scrollToBottom();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      var messageItems = this.state.messages.map(function (message) {
+        return _react2.default.createElement(
+          'li',
+          { key: message.get('id'), className: 'messages-list-item ' + (message.get('me') === true ? 'message-from-me' : 'message-from-them') },
+          _react2.default.createElement(
+            'div',
+            { className: 'message-from-name' },
+            message.get('from')
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            message.get('content')
+          )
+        );
+      });
+      return _react2.default.createElement(
+        'div',
+        { className: 'messages-wrapper' },
+        _react2.default.createElement(
+          'ul',
+          { ref: function ref(elem) {
+              return _this3.scrollList = elem;
+            }, className: 'messages-list' },
+          messageItems
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'messages-input-wrapper' },
+          _react2.default.createElement('textarea', { ref: function ref(elem) {
+              return _this3.inputElement = elem;
+            }, value: this.state.inputValue, className: 'messages-input', onChange: this.inputChange }),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.sendMessage, className: 'messages-input-send' },
+            'send'
+          )
+        )
+      );
+    }
+  }]);
+
+  return MessagesIndex;
+}(_react2.default.PureComponent);
+
+exports.default = MessagesIndex;
 
 /***/ }),
 
@@ -47559,6 +47842,10 @@ var _modal = __webpack_require__("9igV");
 
 var _modal2 = _interopRequireDefault(_modal);
 
+var _messages = __webpack_require__("+yur");
+
+var _messages2 = _interopRequireDefault(_messages);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -47585,7 +47872,12 @@ var App = function (_React$Component) {
         { className: 'app-wrapper' },
         modal,
         _react2.default.createElement(_toolbar2.default, null),
-        this.props.children
+        _react2.default.createElement(
+          'div',
+          { className: 'main-content-wrapper' },
+          this.props.children,
+          _react2.default.createElement(_messages2.default, null)
+        )
       );
     }
   }]);
@@ -52455,4 +52747,4 @@ function symbolObservablePonyfill(root) {
 /***/ })
 
 },["vGYV"]);
-//# sourceMappingURL=main.13a929de5fa160452de4.js.map
+//# sourceMappingURL=main.4c838d9c22f6f9b6edef.js.map

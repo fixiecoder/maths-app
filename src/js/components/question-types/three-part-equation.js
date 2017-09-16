@@ -112,7 +112,7 @@ export default class ThreePartEquation extends React.Component {
       <span style={styles.value} >{this.props.question.get('answer')}</span>;
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
         <form onSubmit={(e) => {
           e.preventDefault();
           if(this.props.question.get('status') === UNANSWERED) {

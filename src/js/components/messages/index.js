@@ -60,20 +60,27 @@ export default class MessagesIndex extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.scrollToBottom();
-    this.inputElement.addEventListener('keypress', (e) => {
-      if(e.key === 'Enter') {
-        e.preventDefault();
-        this.sendMessage();
-      }
-    })
+    if(this.props.open) {
+      this.scrollToBottom();
+      this.inputElement.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter') {
+          e.preventDefault();
+          this.sendMessage();
+        }
+      });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.scrollToBottom();
+    if(this.props.open) {
+      this.scrollToBottom();
+    }
   }
 
   render() {
+    if(!this.props.open) {
+      return null;
+    }
     const messageItems = this.state.messages.map(message => {
       return (
         <li key={message.get('id')} className={`messages-list-item ${message.get('me') === true ? 'message-from-me' : 'message-from-them'}`}>

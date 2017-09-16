@@ -1,6 +1,6 @@
 .main-toolbar {
   height: $main-toolbar-height;
-  background-color: lightblue;
+  background-color: #482487;
   padding-left: 20px;
   display: flex;
   align-items: center;
@@ -16,7 +16,19 @@
 
   .main-toolbar-right {
     display: flex;
+    align-items: center;
 
+    .toolbar-user {
+      margin-right: 20px;
+      color: white;
+    }
+  
+    .toolbar-messages {
+      margin-left: 20px;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+  
     .toolbar-menu-item {
       display: flex;
       align-items: center;

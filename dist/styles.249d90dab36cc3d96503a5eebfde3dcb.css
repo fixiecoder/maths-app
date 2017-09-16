@@ -75,6 +75,9 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column; }
+  .app-wrapper .main-content-wrapper {
+    height: 100%;
+    display: flex; }
 
 .modal-wrapper {
   width: 100vw;
@@ -178,6 +181,53 @@ const loginInputStyle = {
   background-color: #2a2a54;
   color: white; }
 
+.messages-wrapper {
+  width: 260px;
+  height: calc(100% - 100px);
+  z-index: 100;
+  background-color: #fff;
+  font-size: 0.9em; }
+  .messages-wrapper .messages-input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; }
+    .messages-wrapper .messages-input-wrapper .messages-input {
+      height: 80px;
+      margin: 10px 0;
+      width: 80%;
+      resize: none;
+      padding: 5px;
+      font-size: 1.2em; }
+    .messages-wrapper .messages-input-wrapper .messages-input-send {
+      border-radius: 50%;
+      border: none;
+      height: 40px;
+      background-color: green;
+      color: white;
+      transition: background-color 0.2s ease-in-out;
+      cursor: pointer; }
+      .messages-wrapper .messages-input-wrapper .messages-input-send:hover {
+        background-color: lightgreen; }
+  .messages-wrapper .messages-list {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    list-style: none;
+    overflow: auto; }
+    .messages-wrapper .messages-list .messages-list-item {
+      position: relative;
+      width: 88%;
+      padding: 5px;
+      border-radius: 5px; }
+      .messages-wrapper .messages-list .messages-list-item .message-from-name {
+        font-size: 0.8em; }
+    .messages-wrapper .messages-list .message-from-me {
+      margin: 15px 2px 15px 10%;
+      background-color: lightgreen; }
+    .messages-wrapper .messages-list .message-from-them {
+      background-color: mistyrose;
+      margin: 15px 10px 15px 2%; }
+
 .difficulty-heading {
   padding-top: 20px;
   margin: 0; }
@@ -258,16 +308,34 @@ const loginInputStyle = {
   width: 100px;
   cursor: pointer; }
 
-.question-number-structure-wrapper .question-number-structure-question {
+.question-number-structure-wrapper {
   display: flex;
-  justify-content: space-between; }
-  .question-number-structure-wrapper .question-number-structure-question .question-number-structure-question-part {
-    flex-basis: 40px;
-    border: 1px solid red; }
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex: 1; }
+  .question-number-structure-wrapper .question-number-structure-question {
+    display: flex;
+    width: 100%;
+    justify-content: center; }
+    .question-number-structure-wrapper .question-number-structure-question .question-number-structure-question-part {
+      flex-basis: 50px;
+      font-size: 1.5em;
+      height: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      transition: background-color 0.2s ease-in-out, color 0.3s ease-in-out;
+      cursor: pointer; }
+      .question-number-structure-wrapper .question-number-structure-question .question-number-structure-question-part:hover, .question-number-structure-wrapper .question-number-structure-question .question-number-structure-question-part.correct {
+        background-color: grey;
+        color: white; }
 
 .main-toolbar {
-  min-height: 100px;
-  background-color: lightblue;
+  height: 100px;
+  background-color: #482487;
   padding-left: 20px;
   display: flex;
   align-items: center;
@@ -277,7 +345,15 @@ const loginInputStyle = {
     .main-toolbar .main-toolbar-left .main-toolbar-title {
       max-width: 200px; }
   .main-toolbar .main-toolbar-right {
-    display: flex; }
+    display: flex;
+    align-items: center; }
+    .main-toolbar .main-toolbar-right .toolbar-user {
+      margin-right: 20px;
+      color: white; }
+    .main-toolbar .main-toolbar-right .toolbar-messages {
+      margin-left: 10px;
+      margin-right: 20px;
+      cursor: pointer; }
     .main-toolbar .main-toolbar-right .toolbar-menu-item {
       display: flex;
       align-items: center;
@@ -329,4 +405,4 @@ const loginInputStyle = {
   border: 4px solid pink;
   background-color: mistyrose; }
 
-/*# sourceMappingURL=styles.954880983c5a9a7f7855da0f74cabb48.css.map*/
+/*# sourceMappingURL=styles.249d90dab36cc3d96503a5eebfde3dcb.css.map*/

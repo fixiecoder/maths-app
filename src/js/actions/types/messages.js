@@ -1,0 +1,1 @@
+export const SET_MESSAGES_OPEN = 'SET_MESSAGES_OPEN';
