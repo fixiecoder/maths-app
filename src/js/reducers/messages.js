@@ -11,6 +11,9 @@ export default function challenges(state = initialState, action) {
     case actionTypes.SET_MESSAGES_OPEN:
       return state.set('open', !state.get('open'));
 
+    case 'RESET_STATE':
+      return initialState;
+
     default:
       return state;
   }
