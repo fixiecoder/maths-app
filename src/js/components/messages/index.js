@@ -9,7 +9,7 @@ export default class MessagesIndex extends React.PureComponent {
     this.inputChange = this.inputChange.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.state = {
-      inputValue: 'test value',
+      inputValue: '',
       messages: fromJS([
         { id: 1, from: 'Layla', content: 'This is a message from me to someone else, it is not very long', me: true },
         { id: 2, from: 'Daddy', content: 'Rich in heavy atoms two ghostly white figures in coveralls and helmets are soflty dancing quasar explorations', me: false },
@@ -32,8 +32,7 @@ export default class MessagesIndex extends React.PureComponent {
   }
 
   scrollToBottom() {
-    var objDiv = document.getElementById("your_div");
-    this.elem.scrollTop = this.elem.scrollHeight;
+    this.scrollList.scrollTop = this.scrollList.scrollHeight;
   }
 
   inputChange(e) {
@@ -41,6 +40,10 @@ export default class MessagesIndex extends React.PureComponent {
   }
 
   sendMessage() {
+    if(this.state.inputValue === '') {
+      return;
+    }
+
     const message = Map({
       id: uuid.v4(),
       from: 'Layla',
@@ -52,10 +55,18 @@ export default class MessagesIndex extends React.PureComponent {
       inputValue: '',
       messages: this.state.messages.push(message)
     });
+
+    this.inputElement.focus();
   }
 
   componentDidMount() {
     this.scrollToBottom();
+    this.inputElement.addEventListener('keypress', (e) => {
+      if(e.key === 'Enter') {
+        e.preventDefault();
+        this.sendMessage();
+      }
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -73,11 +84,11 @@ export default class MessagesIndex extends React.PureComponent {
     })
     return (
       <div className="messages-wrapper">
-        <ul ref={(elem) => this.elem = elem} className="messages-list">
+        <ul ref={(elem) => this.scrollList = elem} className="messages-list">
           {messageItems}
         </ul>
         <div className="messages-input-wrapper">
-          <textarea value={this.state.inputValue} className="messages-input" onChange={this.inputChange} />
+          <textarea ref={elem => this.inputElement = elem} value={this.state.inputValue} className="messages-input" onChange={this.inputChange} />
           <button onClick={this.sendMessage} className="messages-input-send">send</button>
         </div>
       </div>
