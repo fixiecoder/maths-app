@@ -5,6 +5,9 @@ import {
   generateQuestion,
   answerQuestion,
 } from '../../actions/questions';
+import {
+  resetQuestionHistoryByType
+} from '../../actions/questions';
 
 function mapStateToProps(state) {
   return {
@@ -15,6 +18,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    resetQuestionHistoryByType: (gameType) => dispatch(resetQuestionHistoryByType(gameType)),
     generateQuestion: () => dispatch(generateQuestion()),
     answerQuestion: (question, answer) => dispatch(answerQuestion(question, answer)),
     setCurrentPage: (page) => dispatch(setCurrentPage(page)),

@@ -3,6 +3,7 @@ import { CORRECT, INCORRECT } from '../constants/question-status';
 
 const statsWrapperStyle = {
   display: 'flex',
+  flexDirection: 'column',
   maxWidth: 500,
   width: '100%',
   margin: 'auto'
@@ -18,13 +19,12 @@ export default function Stats(props) {
   const incorrectQuestionCount = props.history.filter(question => question.get('status') === INCORRECT).size;
 
   return (
-    <div>
-      <div style={statsWrapperStyle}>
-        <div style={statStyle}>Total answered {totalQuestionCount}</div>
-        <div style={statStyle} className="">Answered correctly {correctQuestionCount}</div>
-        <div style={statStyle} className="">Answered incorrectly {incorrectQuestionCount}</div>
+    <div className="stats-wrapper">
+      <div className="stats-inner">
+        <div className="stat-item"><span>{totalQuestionCount}</span> questions answered in total.</div>
+        <div className="stat-item"><span className="answer-green">{correctQuestionCount}</span> questions answered correctly.</div>
+        <div className="stat-item"><span className="answer-red">{incorrectQuestionCount}</span> questions answered incorrectly.</div>
       </div>
-      <button onClick={() => props.resetQuestionHistoryByType(props.gameType)}>Reset</button>
     </div>
   );
 }
