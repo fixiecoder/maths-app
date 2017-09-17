@@ -233,6 +233,20 @@ const loginInputStyle = {
       background-color: mistyrose;
       margin: 15px 10px 15px 2%; }
 
+.stats-wrapper {
+  display: flex;
+  flex-direction: column; }
+  .stats-wrapper .stats-inner {
+    display: flex;
+    flex-direction: column; }
+    .stats-wrapper .stats-inner .stat-item {
+      font-size: 1.5em;
+      text-align: center; }
+      .stats-wrapper .stats-inner .stat-item .answer-green {
+        color: green; }
+      .stats-wrapper .stats-inner .stat-item .answer-red {
+        color: red; }
+
 .difficulty-heading {
   padding-top: 20px;
   margin: 0; }
