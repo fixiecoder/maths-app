@@ -4,6 +4,7 @@ import { setCurrentPage } from '../actions/app';
 
 function mapStateToProps(state) {
   return {
+    challenge: state.get('challenge'),
     difficulty: state.getIn(['questions', 'difficulty'])
   };
 }

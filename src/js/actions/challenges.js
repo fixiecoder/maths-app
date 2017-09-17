@@ -36,7 +36,6 @@ export const setChallenge = challenge => dispatch => {
 };
 
 export const setChallengeTrophy = (challengeId, trophy) => (dispatch, getState) => {
-  console.log(trophy)
   const currentTrophy = getState().getIn(['challenges', challengeId, 'trophy']);
   const newTrophyIsBetter = trophyIsBetterThanCurrentTrophy(trophy, currentTrophy);
   if(newTrophyIsBetter) {
@@ -60,6 +59,7 @@ export const initChallenge = (challenge) => dispatch => {
     startTime: Date.now(),
     challengeId: challenge.get('challengeId'),
     questionCount: challenge.get('questionCount'),
+    name: challenge.get('name'),
     currentQuestion: 1,
     history: List(),
     includedTables: tables,
@@ -104,14 +104,19 @@ export const endChallenge = () => (dispatch, getState) => {
   // save challenge to challengeHistory
   dispatch({ type: actionTypes.ADD_TO_CHALLENGE_HISTORY, id, challenge: updatedChallenge });
 
+  let trophy = null;
+
   if(percentage >= 100) {
-    dispatch(setChallengeTrophy(challenge.get('challengeId'), 'GOLD'));
+    trophy = 'GOLD';
   } else if(percentage >= 75) {
-    dispatch(setChallengeTrophy(challenge.get('challengeId'), 'SILVER'));
+    trophy = 'SILVER';
   } else if(percentage >= 50) {
-    dispatch(setChallengeTrophy(challenge.get('challengeId'), 'BRONZE'));
+    trophy = 'BRONZE';
   }
 
+  dispatch({ type: actionTypes.SET_TROPHY_ON_CURRENT_CHALLENGE, trophy })
+
+  dispatch(setChallengeTrophy(challenge.get('challengeId'), trophy));
   dispatch(storeUserChallenges());
   dispatch(uploadChallengeToHistory(updatedChallenge));
 

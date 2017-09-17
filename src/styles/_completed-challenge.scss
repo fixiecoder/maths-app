@@ -1,0 +1,50 @@
+.completed-challenge-wrapper {
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+
+  .challenge-name {
+    font-size: 1.2em;
+    color: #482487;
+  }
+  .trophy-text {
+    font-size: 1.5em;
+
+    .trophy-gold {
+      font-weight: bold;
+      font-size: 1.5em;
+      color: gold;
+    }
+
+    .trophy-silver {
+      font-weight: bold;
+      font-size: 1.5em;
+      color: silver;
+    }
+
+    .trophy-bronze {
+      font-weight: bold;
+      font-size: 1.5em;
+      color: brown;
+    }
+  }
+
+  .summary-text {
+    font-size: 1.5em;
+
+    .answer-count {
+      font-size: 1.5em;
+
+      &.correct-green {
+        color: green;
+      }
+
+      &.incorrect-red {
+        color: red;
+      }
+    }
+  }
+}

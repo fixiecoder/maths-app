@@ -223,8 +223,9 @@ export const answerQuestion = (question, answer) => (dispatch, getState) => {
   if(gameType === CHALLENGE) {
     dispatch({ type: actionTypes.ADD_QUESTION_TO_CHALLENGE, question, gameType });
     if(currentQuestion === questionCount) {
-      dispatch(endChallenge());
+     return  dispatch(endChallenge());
     }
+    dispatch({ type: actionTypes.INCREMENT_CURRENT_QUESTION });
   } else {
     dispatch({ type: actionTypes.ADD_QUESTION_TO_HISTORY, question, gameType });
   }

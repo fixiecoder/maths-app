@@ -71,7 +71,7 @@ export default class Practices extends React.PureComponent {
             onClick={this.startPractice}
             className={`menu-play-button ${disabledClass}`}
           >
-            START
+            <span style={{ width: '100%' }}>START</span>
           </button>
         </div>
       </div>

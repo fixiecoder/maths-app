@@ -1,6 +1,6 @@
 import React from 'react';
 import { FORMAT1, FORMAT2, FORMAT3 } from '../../constants/question-formats';
-import { UNANSWERED, CORRECT } from '../../constants/question-status';
+import { UNANSWERED, CORRECT, INCORRECT } from '../../constants/question-status';
 import Input from './question-input';
 import Stats from '../../containers/stats';
 import { PRACTICE_QUESTION, CHALLENGE_QUESTION } from '../../constants/pages';
@@ -50,17 +50,16 @@ const nextQuestionButtonStyle = Object.assign({}, button, {
   border: '4px solid blue',
 });
 
-const wrapperStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-around'
-};
+// const wrapperStyle = {
+//   display: 'flex',
+//   alignItems: 'center',
+//   justifyContent: 'space-around'
+// };
 
-const messageStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  height: 40
-};
+// const messageStyle = {
+//   display: 'flex',
+//   justifyContent: 'center',
+// };
 
 const speedStyle = {
   display: 'flex',
@@ -92,13 +91,17 @@ export default class ThreePartEquation extends React.Component {
   }
 
   answerChange(value) {
-    this.setState({
-      answer: value
-    });
+    if(!isNaN(value)) {
+      this.setState({
+        answer: value
+      });
+    }
   }
 
   render() {
-    const result = this.props.question.get('status') === CORRECT ? 'correctly' : 'incorrectly';
+    const status = this.props.question.get('status');
+    const answered = status !== UNANSWERED;
+    const resultDisplayWord = status === CORRECT ? 'correctly' : 'incorrectly';
     const val1 = this.props.question.get('questionType') === FORMAT2 ?
       <Input value={this.state.answer} onChange={this.answerChange} question={this.props.question} /> :
       <span style={styles.value} >{this.props.question.get('qValue1')}</span>;
@@ -111,16 +114,54 @@ export default class ThreePartEquation extends React.Component {
       <Input value={this.state.answer} onChange={this.answerChange} question={this.props.question} /> :
       <span style={styles.value} >{this.props.question.get('answer')}</span>;
 
+
+    const callToActionButton = answered ? (
+      <button
+        className="menu-play-button fixed-width"
+        disabled={status === UNANSWERED}
+        onClick={this.props.generateQuestion}
+      >
+        <span style={{ width: '100%' }}>Next</span>
+      </button>
+    ) : (
+      <button
+        className="menu-play-button fixed-width"
+        disabled={status !== UNANSWERED}
+        type="button"
+        onClick={() => this.props.answerQuestion(this.props.question, this.state.answer)}
+      >
+        <span style={{ width: '100%' }}>Am I right?</span>
+      </button>
+    );
+
+    let stats = null;
+    if(this.props.gameType === PRACTICE) {
+      stats = <Stats />
+    }
+
+    let resultText = null;
+
+    switch(status) {
+      // case CORRECT:
+      
+      case INCORRECT:
+        resultText = <div className="question-incorrect-result">The correct answer was <span className="correct-answer">{this.props.question.get('answer')}</span></div>
+        break;
+
+    } 
+
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          if(this.props.question.get('status') === UNANSWERED) {
-            this.props.answerQuestion(this.props.question, this.state.answer);
-          } else {
-            this.props.generateQuestion();
-          }
-        }} style={wrapperStyle}>
+      <div className="three-part-equation-wrapper">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if(answered === false) {
+              this.props.answerQuestion(this.props.question, this.state.answer);
+            } else {
+              this.props.generateQuestion();
+            }
+          }}
+        >
           <div style={{ display: 'flex', alignItems: 'center' }} >
             {val1}
             <span style={styles.symbol}>{symbolMap[this.props.question.get('method')]}</span>
@@ -129,48 +170,16 @@ export default class ThreePartEquation extends React.Component {
             {answer}
           </div>
         </form>
-        <div style={messageStyle}>
-          <p>{this.props.question.get('message')}</p>
+        <div className="page-section">
+          <p className={`result-message${status === INCORRECT ? ' incorrect-answer' : ' correct-answer'}`}>{this.props.question.get('message')}</p>
+        </div>
+        <div className="page-section">
+          {resultText}
         </div>
         <div style={buttonsWrapper}>
-          <button
-            style={
-              this.props.question.get('status') === UNANSWERED ?
-                answerButtonStyle :
-                Object.assign({}, answerButtonStyle, {
-                  border: '4px solid lightgrey',
-                  color: 'lightgrey',
-                })
-            }
-            disabled={this.props.question.get('status') !== UNANSWERED}
-            type="button"
-            onClick={() => this.props.answerQuestion(this.props.question, this.state.answer)}
-          >
-            Check my answer
-          </button>
-          <button
-            style={
-              this.props.question.get('status') !== UNANSWERED ?
-                nextQuestionButtonStyle :
-                Object.assign({}, nextQuestionButtonStyle, {
-                  border: '4px solid lightgrey',
-                  color: 'lightgrey',
-                })
-            }
-            disabled={this.props.question.get('status') === UNANSWERED}
-            onClick={this.props.generateQuestion}
-          >
-            Next Question
-          </button>
+          {callToActionButton}
         </div>
-        <div style={speedStyle}>{
-            this.props.question.get('status') !== UNANSWERED ? (
-               <span>
-                You answered in {result} {(this.props.question.get('duration') / 1000).toFixed(1)} seconds
-              </span>
-            ) : null
-          }</div>
-        <Stats />
+          {/*stats*/}
       </div>
     );
   }

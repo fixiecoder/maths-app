@@ -11,9 +11,14 @@ export default function challenges(state = initialState, action) {
     case actionTypes.RESET_CHALLENGE_FACTOR:
       return state.setIn(['includedTables', action.table, 'factors', action.factorType], Range(1, 11).toList());
 
+    case actionTypes.SET_TROPHY_ON_CURRENT_CHALLENGE:
+      return state.set('trophy', action.trophy);
+
     case actionTypes.ADD_QUESTION_TO_CHALLENGE:
-      return state.updateIn(['history'], history => history.push(action.question))
-        .set('currentQuestion', state.get('currentQuestion') + 1);
+      return state.updateIn(['history'], history => history.push(action.question));
+
+    case actionTypes.INCREMENT_CURRENT_QUESTION:
+      return state.set('currentQuestion', state.get('currentQuestion') + 1);
 
     case actionTypes.SET_CHALLENGE:
       return action.challenge;

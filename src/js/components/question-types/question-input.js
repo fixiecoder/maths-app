@@ -51,6 +51,8 @@ export default class QuestionInput extends React.Component {
           <input
             ref={(input) => { this.answerInput = input; }}
             type="number"
+            type="text"
+            pattern="[0-9]*"
             style={inputStyle}
             value={this.props.value}
             onChange={e => this.props.onChange(e.target.value)}

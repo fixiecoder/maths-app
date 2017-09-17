@@ -29,3 +29,60 @@
     }
   }
 }
+
+.three-part-equation-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+
+  form {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .page-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 80px;
+  }
+
+  .result-message {
+    font-size: 2em;
+    margin: 0;
+
+    &.correct-answer {
+      color: green;
+    }
+
+    &.incorrect-answer {
+      color: red;
+    }
+  }
+
+  .next-question-button {
+    font-size: 2em;
+  }
+
+  .check-answer-button {
+    font-size: 2em;
+    background-color: #fff;
+    border: 
+    &:hover {
+
+    }
+  }
+
+  .question-incorrect-result {
+    font-weight: bold;
+    font-size: 1.5em;
+
+    .correct-answer {
+      color: green;
+      font-size: 1.5em;
+    }
+  }
+}
