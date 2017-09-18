@@ -170,16 +170,16 @@ export default class ThreePartEquation extends React.Component {
             {answer}
           </div>
         </form>
+        <div style={buttonsWrapper}>
+          {callToActionButton}
+        </div>
         <div className="page-section">
           <p className={`result-message${status === INCORRECT ? ' incorrect-answer' : ' correct-answer'}`}>{this.props.question.get('message')}</p>
         </div>
         <div className="page-section">
           {resultText}
         </div>
-        <div style={buttonsWrapper}>
-          {callToActionButton}
-        </div>
-          {stats}
+        {stats}
       </div>
     );
   }

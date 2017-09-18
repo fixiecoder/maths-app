@@ -4,7 +4,7 @@ import * as actionTypes from '../actions/types/challenge';
 const initialState = Map({
   '2-times-table-easy': Map({
     order: 0,
-    questionCount: 4,
+    questionCount: 10,
     name: 'Two times table easy',
     challengeId: '2-times-table-easy',
     includedTables: List(['two']),
