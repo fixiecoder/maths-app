@@ -26,8 +26,9 @@ export default function TablePicker(props) {
         </div>
       )
     );
+  const tablePickerHeight = window.innerWidth < 750 ? 340 : 210;
   const style = {
-    display: props.show ? 'flex' : 'none'
+    height: props.show ? tablePickerHeight : 0
   };
   return (
     <div className="table-picker-wrapper" style={style}>
