@@ -75,11 +75,9 @@ body {
   color: white; }
 
 .app-wrapper {
-  height: 100vh;
   display: flex;
   flex-direction: column; }
   .app-wrapper .main-content-wrapper {
-    height: 100%;
     display: flex; }
 
 .modal-wrapper {
@@ -179,6 +177,8 @@ const loginInputStyle = {
   text-align: center;
   flex: 1;
   width: 100%; }
+  .practice-menu-wrapper h3 {
+    color: #482487; }
 
 .practice-menu-heading {
   margin: 0;
@@ -308,11 +308,15 @@ const loginInputStyle = {
   flex-direction: column;
   background-color: mistyrose;
   transition: height 0.3s ease; }
+  .table-picker-wrapper h3 {
+    color: #482487; }
 
 .table-picker-inner {
   display: flex;
   justify-content: center;
-  width: 100%; }
+  width: 100%;
+  flex-wrap: wrap;
+  padding: 0 40px 40px; }
 
 .table-picker-table-wrapper {
   flex: 1;
