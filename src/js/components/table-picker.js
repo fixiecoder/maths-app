@@ -27,7 +27,7 @@ export default function TablePicker(props) {
       )
     );
   const style = {
-    height: props.show ? 200 : 0
+    display: props.show ? 'flex' : 'none'
   };
   return (
     <div className="table-picker-wrapper" style={style}>

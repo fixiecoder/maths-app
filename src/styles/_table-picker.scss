@@ -4,13 +4,19 @@
   align-items: center;
   flex-direction: column;
   background-color: mistyrose;
-  transition: height 0.3s ease;
+  transition: display 0.3s ease;
+
+  h3 {
+    color: $app-purple;
+  }
 }
 
 .table-picker-inner {
   display: flex;
   justify-content: center;
   width: 100%;
+  flex-wrap: wrap;
+  padding: 0 40px 40px;
 }
 
 .table-picker-table-wrapper {

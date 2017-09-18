@@ -135,9 +135,7 @@ export default class ThreePartEquation extends React.Component {
     );
 
     let stats = null;
-      console.log(this.props.gameType)
     if(this.props.gameType === PRACTICE) {
-      console.log('hellllo')
       stats = <Stats />
     }
 
