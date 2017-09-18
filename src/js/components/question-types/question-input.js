@@ -49,10 +49,9 @@ export default class QuestionInput extends React.Component {
         <span style={spacerStyle}>
           {this.props.value || '#'}
           <input
+            className="question-input"
             ref={(input) => { this.answerInput = input; }}
             type="number"
-            type="text"
-            pattern="[0-9]*"
             style={inputStyle}
             value={this.props.value}
             onChange={e => this.props.onChange(e.target.value)}

@@ -312,6 +312,7 @@ const loginInputStyle = {
     color: #482487; }
 
 .table-picker-inner {
+  max-width: 770px;
   display: flex;
   justify-content: center;
   width: 100%;
