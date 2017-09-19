@@ -8,6 +8,7 @@ import { Router, Route, browserHistory, IndexRedirect } from 'react-router'
 import Question from './containers/question';
 import Login from './containers/login';
 import Menu from './containers/menu';
+import Learn from './containers/learn';
 import Practices from './containers/practices';
 import Challenges from './containers/challenges';
 import CompleteChallenge from './containers/completed-challenge';
@@ -47,6 +48,7 @@ ReactDOM.render((
           <Route path="challenge" component={Challenges} />
           <Route path="completed" component={CompleteChallenge} />
           <Route path="questions" component={Question} />
+          <Route path="learn" component={Learn} />
         </Route>
       </Route>
     </Router>

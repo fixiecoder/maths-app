@@ -26,6 +26,7 @@ export default class Menu extends React.PureComponent {
     return (
       <div className="menu-play-buttons-wrapper">
         <div className="menu-play-buttons">
+          <button className="menu-play-button" onClick={() => this.goTo('/app/learn')}><span style={{ width: '100%' }}>Learn</span></button>
           <button className="menu-play-button" onClick={() => this.goTo('/app/practice')}><span style={{ width: '100%' }}>Practice</span></button>
           <button className="menu-play-button" onClick={() => this.goTo('/app/challenge')}><span style={{ width: '100%' }}>Challenge</span></button>
         </div>

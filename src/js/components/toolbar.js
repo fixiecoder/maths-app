@@ -8,6 +8,7 @@ import {
   PRACTICE_QUESTION,
   CHALLENGE_QUESTION,
   COMPLETED_CHALLENGE,
+  LEARN,
 } from '../constants/pages';
 import BackIcon from 'react-icons/lib/fa/arrow-circle-left';
 import CloseIcon from 'react-icons/lib/fa/close';
@@ -19,6 +20,7 @@ export default function Toolbar(props) {
   switch(props.currentPage) {
     case CHALLENGE_MENU:
     case PRACTICE_MENU:
+    case LEARN:
       questionMenuItems = (
         <div className="toolbar-menu-item">
           <Link to="/app/menu"><BackIcon size={50} fill={'#fff'} /></Link>

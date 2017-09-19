@@ -6,3 +6,4 @@ export const MENU = 'MENU';
 export const PRACTICE_MENU = 'PRACTICE_MENU';
 export const CHALLENGE_MENU = 'CHALLENGE_MENU';
 export const COMPLETED_CHALLENGE = 'COMPLETED_CHALLENGE';
+export const LEARN = 'LEARN';
