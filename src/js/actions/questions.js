@@ -42,8 +42,8 @@ function generateMultiplicationQuestion(difficulty) {
 
   const tableIndex = getRandomNumberBetween(0, includedTablesList.size - 1);
   let table = includedTablesList.get(tableIndex);
-  const qValue1 = table.get('value');
-  let qValue2;
+  const qValue2 = table.get('value');
+  let qValue1;
 
   let refreshTable = false;
   const resetFactorActonType = isPractice ? RESET_PRACTICE_FACTOR : RESET_CHALLENGE_FACTOR;
@@ -63,14 +63,14 @@ function generateMultiplicationQuestion(difficulty) {
 
   customType = [FORMAT1, FORMAT3][getRandomNumberBetween(0, 1)];
   const val2Index = table ? getRandomNumberBetween(0, table.getIn(['factors', 'qV2']).size - 1) : 0;
-  qValue2 = table.getIn(['factors', 'qV2', val2Index]);
-  factor = qValue2;
+  qValue1 = table.getIn(['factors', 'qV2', val2Index]);
+  factor = qValue1;
   factorType = 'qV2';
 
   const removeFactorActionType = isPractice === true ? REMOVE_PRACTICE_FACTOR : REMOVE_CHALLENGE_FACTOR;
   store.dispatch({ type: removeFactorActionType, table: table.get('key'), factor, factorType });
 
-  const answer = qValue1 * qValue2;
+  const answer = qValue2 * qValue1;
   return Map({
     questionRef: uuid.v4(),
     qValue1,

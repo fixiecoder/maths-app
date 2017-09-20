@@ -102,11 +102,11 @@ export default class ThreePartEquation extends React.Component {
     const status = this.props.question.get('status');
     const answered = status !== UNANSWERED;
     const resultDisplayWord = status === CORRECT ? 'correctly' : 'incorrectly';
-    const val1 = this.props.question.get('questionType') === FORMAT2 ?
+    const val1 = this.props.question.get('questionType') === FORMAT3 ?
       <Input value={this.state.answer} onChange={this.answerChange} question={this.props.question} /> :
       <span style={styles.value} >{this.props.question.get('qValue1')}</span>;
 
-    const val2 = this.props.question.get('questionType') === FORMAT3 ?
+    const val2 = this.props.question.get('questionType') === FORMAT2 ?
       <Input value={this.state.answer} onChange={this.answerChange} question={this.props.question} /> :
       <span style={styles.value} >{this.props.question.get('qValue2')}</span>;
 

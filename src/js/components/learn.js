@@ -37,6 +37,7 @@ export default class Learn extends React.PureComponent {
       const color = invertColor(backgroundColor);
       return (
         <div className="table-column" key={key} style={{ backgroundColor, color }}>
+          <h3 style={{ borderBottom: `1px solid ${color}` }}> {key + 1} Times Table</h3>
           {
             table.map(multiple => (
               <div key={multiple.multiple} className="table-multiple">
