@@ -1,4 +1,5 @@
 const baseUrl = 'https://4uyjdpykmh.execute-api.eu-west-1.amazonaws.com/prod';
+// const baseUrl = 'https://4uyjdpykmh.execute-api.eu-west-1.amazonaws.com/dev';
 
 const makeRequest = (uri, method, body) => (dispatch, getState) => new Promise((resolve, reject) => {
   const authTokens = getState().get('auth');

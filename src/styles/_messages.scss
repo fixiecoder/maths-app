@@ -42,17 +42,30 @@
   .messages-list {
     margin: 0;
     padding: 0;
-    height: 100%; //calc(100% - 100px);
+    height: calc(100vh - 204px);
     list-style: none;
     overflow: auto;
 
     .messages-list-item {
       position: relative;
       width: 88%;
-      padding: 5px;
+      padding: 12px;
       border-radius: 5px;
 
       .message-from-name {
+        font-size: 0.8em;
+        margin-bottom: 8px;
+      }
+
+      .message-content {
+        margin-bottom: 10px;
+        font-size: 1.2em;
+      }
+
+      .message-sent-time {
+        position: absolute;
+        bottom: 7px;
+        right: 12px;
         font-size: 0.8em;
       }
     }

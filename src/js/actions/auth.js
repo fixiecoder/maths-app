@@ -4,6 +4,7 @@ import * as actionTypes from './types/auth';
 import { setLoading } from './app';
 import API from './api';
 import { getUserChallenges, getChallengeHistory } from './challenges';
+import { initConversations } from './messages';
 
 export function setAuthTokens(authTokens) {
   return { type: actionTypes.SET_AUTH_TOKENS, authTokens };
@@ -26,16 +27,18 @@ export const attemptLogin = (credentials) => dispatch => {
     .then(() => Promise.all([
       dispatch(getUserChallenges()),
       dispatch(getChallengeHistory()),
+      initConversations(),
     ]))
     .then(() => {
       dispatch(setLoading(false));
       browserHistory.replace('/app');
     })
     .catch(e => {
+      throw e;
       const loginError = 'Invalid username or password, please try again';
       dispatch(setLoading(false));
       dispatch({ type: actionTypes.SET_LOGIN_ERROR, loginError });
-    })
+    });
 };
 
 export const logout = () => (dispatch, getState) => {

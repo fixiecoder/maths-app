@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux'
-// import './index.css';
+import { Provider } from 'react-redux';
+import { Router, Route, browserHistory, IndexRedirect } from 'react-router';
 import App from './containers/app';
-// import registerServiceWorker from './registerServiceWorker';
-import { Router, Route, browserHistory, IndexRedirect } from 'react-router'
 import Question from './containers/question';
 import Login from './containers/login';
 import Menu from './containers/menu';
@@ -13,6 +11,7 @@ import Practices from './containers/practices';
 import Challenges from './containers/challenges';
 import CompleteChallenge from './containers/completed-challenge';
 import store from './store';
+import { logout } from './actions/auth';
 
 import '../styles/index.scss';
 import '../html/robots.txt';
@@ -35,12 +34,17 @@ function requireAuth(mextState, replace, callback) {
   callback();
 }
 
+function logoutRoute() {
+  store.dispatch(logout());
+}
+
 ReactDOM.render((
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/">
         <IndexRedirect to="login" />
         <Route path="login" component={Login} onEnter={requireNoAuth} />
+        <Route path="logout" onEnter={logoutRoute} />
         <Route path="app" component={App} onEnter={requireAuth}>
           <IndexRedirect to="Menu" />
           <Route path="menu" component={Menu} />

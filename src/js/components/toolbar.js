@@ -59,9 +59,9 @@ export default function Toolbar(props) {
           <p>Hi {props.user.get('name')}</p>
         </div>
         {questionMenuItems}
-{/*        <div className="toolbar-messages" onClick={props.toggleMessagesOpen} >
+        <div className="toolbar-messages" onClick={props.toggleMessagesOpen} >
           <MessageIcon fill={'#fff'} size={30} />
-        </div>*/}
+        </div>
         <button className="main-toolbar-logout-button" onClick={() => props.setShowModal(true)}>
           <CloseIcon size={50} fill={'red'} />
         </button>

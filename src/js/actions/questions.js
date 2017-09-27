@@ -91,7 +91,6 @@ function generateAdditionQuesion(difficulty) {
     addSubractRangeLimit = 999;
   }
   const customType = [FORMAT1, FORMAT3][getRandomNumberBetween(0, 1)];
-  const reducer = getQuestionReducer(); 
   const qValue1 = getRandomNumberBetween(0, addSubractRangeLimit);
   const qValue2 = getRandomNumberBetween(0, addSubractRangeLimit);
   const answer = qValue1 + qValue2;
@@ -104,7 +103,7 @@ function generateAdditionQuesion(difficulty) {
     startTime: Date.now(),
     questionType: difficulty === difficulties.EASY ? FORMAT1 : customType,
     status: statusTypes.UNANSWERED,
-  }); 
+  });
 }
 
 function generateSubtractionQuesion(difficulty) {
@@ -115,10 +114,9 @@ function generateSubtractionQuesion(difficulty) {
     addSubractRangeLimit = 999;
   }
   const customType = [FORMAT1, FORMAT3][getRandomNumberBetween(0, 1)];
-  const reducer = getQuestionReducer(); 
   const qValue1 = getRandomNumberBetween(0, addSubractRangeLimit);
   const qValue2 = getRandomNumberBetween(0, addSubractRangeLimit);
-  const answer = qValue1 + qValue2;
+  const answer = qValue1 - qValue2;
   return Map({
     questionRef: uuid.v4(),
     qValue1,
@@ -128,13 +126,13 @@ function generateSubtractionQuesion(difficulty) {
     startTime: Date.now(),
     questionType: difficulty === difficulties.EASY ? FORMAT1 : customType,
     status: statusTypes.UNANSWERED,
-  }); 
+  });
 }
 
 export const generateQuestion = () => (dispatch, getState) => {
   const reducer = getQuestionReducer();
   const methods = getState().getIn([reducer, 'methods']).toList();
-  let method = methods.get(getRandomNumberBetween(0, methods.size - 1)).get('method');
+  const method = methods.get(getRandomNumberBetween(0, methods.size - 1)).get('method');
   const difficulty = getState().getIn([reducer, 'difficulty']);
 
   let question;
@@ -155,15 +153,6 @@ export const generateQuestion = () => (dispatch, getState) => {
 
   dispatch({ type: actionTypes.SET_CURRENT_QUESTION, question });
 };
-
-export const checkQuestionIsUnique = quesion => (dispatch, getState) => {
-
-};
-
-export const checkAnswer = (question, answer) => dispatch => {
-
-};
-
 
 export const answerQuestion = (question, answer) => (dispatch, getState) => {
   let status;
@@ -205,7 +194,7 @@ export const answerQuestion = (question, answer) => (dispatch, getState) => {
   if(gameType === CHALLENGE) {
     dispatch({ type: actionTypes.ADD_QUESTION_TO_CHALLENGE, question, gameType });
     if(currentQuestion === questionCount) {
-     return  dispatch(endChallenge());
+     return dispatch(endChallenge());
     }
     dispatch({ type: actionTypes.INCREMENT_CURRENT_QUESTION });
   } else {
