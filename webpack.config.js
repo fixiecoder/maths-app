@@ -30,7 +30,7 @@ const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
     - uglifyjs-webpack-plugin
     - webpack
     - webpack-dev-server
-    
+
     npm i --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react css-loader extract-text-webpack-plugin file-loader html-webpack-plugin node-sass sass-loader style-loader uglifyjs-webpack-plugin webpack webpack-dev-server
 
 */
@@ -39,7 +39,7 @@ const isProduction = process.env.BUILD_ENV === 'production';
 const productionPlugins = isProduction ? [
   new webpack.DefinePlugin({
     'process.env': {
-      'NODE_ENV': JSON.stringify('production')
+      NODE_ENV: JSON.stringify('production')
     }
   }),
   new UglifyJSPlugin()
@@ -88,7 +88,7 @@ module.exports = {
             options: {
               context: 'src',
               name: '[path][name].[hash].[ext]'
-            }  
+            }
           }
         ]
       },
@@ -100,7 +100,7 @@ module.exports = {
             options: {
               context: 'src',
               name: '[name].[ext]'
-            }  
+            }
           }
         ]
       }
