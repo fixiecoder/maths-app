@@ -1,18 +1,32 @@
 import React from 'react';
 
-export default function NumberStructure(props) {
+export default class NumberStructure extends React.PureComponent {
 
-  return (
-    <div className="question-number-structure-wrapper">
-      <div>
-        <p>Click on the number that represents the tens</p>
+  submitAnswer(e) {
+    console.log(e.target.id);
+  }
+
+  render() {
+    const questionElements = this.props.question.get('questionElements').map(questionObj => (
+      <div
+        id={questionObj.get('order')}
+        key={questionObj.get('order')}
+        className="question-number-structure-question-part"
+        onClick={this.submitAnswer}
+      >
+        {questionObj.get('value')}
       </div>
-      <div className="question-number-structure-question">
-        <div className="question-number-structure-question-part">1</div>
-        <div className="question-number-structure-question-part">0</div>
-        <div className="question-number-structure-question-part correct">2</div>
-        <div className="question-number-structure-question-part">4</div>
+    ));
+
+    return (
+      <div className="question-number-structure-wrapper">
+        <div>
+          <p>Click on the number that represents the tens</p>
+        </div>
+        <div className="question-number-structure-question">
+          {questionElements}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
