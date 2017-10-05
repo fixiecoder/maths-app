@@ -1,8 +1,5 @@
-// const baseUrl = 'https://k2txetottc.execute-api.eu-west-1.amazonaws.com/prod';
 const baseUrl = 'https://74gu0ergib.execute-api.eu-west-1.amazonaws.com/prod';
-// const baseUrl = 'https://4uyjdpykmh.execute-api.eu-west-1.amazonaws.com/dev';
 
-// https://k2txetottc.execute-api.eu-west-1.amazonaws.com/prod
 const makeRequest = (uri, method, body) => (dispatch, getState) => new Promise((resolve, reject) => {
   const authTokens = getState().get('auth');
   const headers = new Headers({
