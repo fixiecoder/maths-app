@@ -11,6 +11,7 @@ import {
   ADD,
   SUBTRACT,
   DIVIDE,
+  methodsQuestionTypeMap,
 } from '../constants/methods';
 import * as statusTypes from '../constants/question-status';
 import {
@@ -43,7 +44,6 @@ function generateMultiplicationQuestion(difficulty) {
   const tableIndex = getRandomNumberBetween(0, includedTablesList.size - 1);
   let table = includedTablesList.get(tableIndex);
   const qValue2 = table.get('value');
-  let qValue1;
 
   let refreshTable = false;
   const resetFactorActonType = isPractice ? RESET_PRACTICE_FACTOR : RESET_CHALLENGE_FACTOR;
@@ -57,15 +57,11 @@ function generateMultiplicationQuestion(difficulty) {
     table = store.getState().getIn([reducer, 'includedTables', table.get('key')]);
   }
 
-  let customType;
-  let factor;
-  let factorType;
-
-  customType = [FORMAT1, FORMAT3][getRandomNumberBetween(0, 1)];
+  const customType = [FORMAT1, FORMAT3][getRandomNumberBetween(0, 1)];
   const val2Index = table ? getRandomNumberBetween(0, table.getIn(['factors', 'qV2']).size - 1) : 0;
-  qValue1 = table.getIn(['factors', 'qV2', val2Index]);
-  factor = qValue1;
-  factorType = 'qV2';
+  const qValue1 = table.getIn(['factors', 'qV2', val2Index]);
+  const factor = qValue1;
+  const factorType = 'qV2';
 
   const removeFactorActionType = isPractice === true ? REMOVE_PRACTICE_FACTOR : REMOVE_CHALLENGE_FACTOR;
   store.dispatch({ type: removeFactorActionType, table: table.get('key'), factor, factorType });
@@ -79,7 +75,7 @@ function generateMultiplicationQuestion(difficulty) {
     answer,
     startTime: Date.now(),
     questionFormat: difficulty === difficulties.EASY ? FORMAT1 : customType,
-    questionType: THREE_PART_EQUATION,
+    questionType: methodsQuestionTypeMap[MULTIPLY],
     status: statusTypes.UNANSWERED,
   });
 }
