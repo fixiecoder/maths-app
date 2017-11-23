@@ -8,7 +8,7 @@ export function getRandomNumberBetween(lower, upper) {
   return _.random(lower, upper);
 }
 
-export function getRandomType() {
+export function getRandomFormat() {
   const typeIndex = getRandomNumberBetween(0, questionFormatsList.length - 1);
   return questionFormatsList[typeIndex];
 }

@@ -35,7 +35,7 @@ const makeRequest = (uri, method, body) => (dispatch, getState) => new Promise((
     })
     .then(responseData => resolve(responseData))
     .catch(e => {
-      reject(e)
+      reject(e);
     });
 });
 

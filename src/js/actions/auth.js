@@ -21,6 +21,9 @@ export const attemptLogin = (credentials) => dispatch => {
   dispatch(setLoading(true));
   dispatch(API.post('/session', credentials))
     .then(result => {
+      if(result.errorMessage) {
+        throw new Error(result.errorMessage);
+      }
       dispatch(setAuthTokens(Map({ tokenKey: result.tokenKey, tokenValue: result.tokenValue })));
       return dispatch(getUser(credentials.username));
     })
@@ -34,7 +37,7 @@ export const attemptLogin = (credentials) => dispatch => {
       browserHistory.replace('/app');
     })
     .catch(e => {
-      throw e;
+      // throw e;
       const loginError = 'Invalid username or password, please try again';
       dispatch(setLoading(false));
       dispatch({ type: actionTypes.SET_LOGIN_ERROR, loginError });

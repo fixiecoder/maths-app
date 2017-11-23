@@ -2,8 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 /*
 
   requires src structure:
@@ -135,6 +135,20 @@ module.exports = {
   devServer: {
     contentBase: './dist',
     port: 3000,
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      'https://k2txetottc.execute-api.eu-west-1.amazonaws.com/prod': {
+        target: 'https://k2txetottc.execute-api.eu-west-1.amazonaws.com/dev',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-id, Content-Length, X-Requested-With',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+        },
+        onProxyRes: (proxyRes, req, res) => {
+          console.log(req);
+        }
+      }
+    }
   }
 };

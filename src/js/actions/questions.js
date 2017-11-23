@@ -10,7 +10,8 @@ import {
   MULTIPLY,
   ADD,
   SUBTRACT,
-  DIVIDE
+  DIVIDE,
+  methodsQuestionTypeMap,
 } from '../constants/methods';
 import * as statusTypes from '../constants/question-status';
 import {
@@ -24,7 +25,7 @@ import * as difficulties from '../constants/difficulty-types';
 import { PRACTICE, CHALLENGE } from '../constants/game-types';
 import { endChallenge } from './challenges';
 import store from '../store';
-
+import { NUMBER_STRUCTURE, THREE_PART_EQUATION } from '../constants/question-types';
 export const setChallengeHistory = (challengeHistory) => {
   return { type: actionTypes.SET_CHALLENGE_HISTORY, challengeHistory };
 };
@@ -43,7 +44,6 @@ function generateMultiplicationQuestion(difficulty) {
   const tableIndex = getRandomNumberBetween(0, includedTablesList.size - 1);
   let table = includedTablesList.get(tableIndex);
   const qValue2 = table.get('value');
-  let qValue1;
 
   let refreshTable = false;
   const resetFactorActonType = isPractice ? RESET_PRACTICE_FACTOR : RESET_CHALLENGE_FACTOR;
@@ -57,20 +57,20 @@ function generateMultiplicationQuestion(difficulty) {
     table = store.getState().getIn([reducer, 'includedTables', table.get('key')]);
   }
 
-  let customType;
-  let factor;
-  let factorType;
+  const customType = [FORMAT1, FORMAT3][getRandomNumberBetween(0, 1)];
 
-  customType = [FORMAT1, FORMAT3][getRandomNumberBetween(0, 1)];
   const val2Index = table ? getRandomNumberBetween(0, table.getIn(['factors', 'qV2']).size - 1) : 0;
-  qValue1 = table.getIn(['factors', 'qV2', val2Index]);
-  factor = qValue1;
-  factorType = 'qV2';
+  const qValue1 = table.getIn(['factors', 'qV2', val2Index]);
+  const factor = qValue1;
+  const factorType = 'qV2';
 
   const removeFactorActionType = isPractice === true ? REMOVE_PRACTICE_FACTOR : REMOVE_CHALLENGE_FACTOR;
   store.dispatch({ type: removeFactorActionType, table: table.get('key'), factor, factorType });
 
   const answer = qValue2 * qValue1;
+
+  console.log(customType, qValue2, qValue1, 'answer:', answer);
+
   return Map({
     questionRef: uuid.v4(),
     qValue1,
@@ -78,7 +78,8 @@ function generateMultiplicationQuestion(difficulty) {
     method: MULTIPLY,
     answer,
     startTime: Date.now(),
-    questionType: difficulty === difficulties.EASY ? FORMAT1 : customType,
+    questionFormat: difficulty === difficulties.EASY ? FORMAT1 : customType,
+    questionType: methodsQuestionTypeMap[MULTIPLY],
     status: statusTypes.UNANSWERED,
   });
 }
@@ -101,7 +102,8 @@ function generateAdditionQuesion(difficulty) {
     method: ADD,
     answer,
     startTime: Date.now(),
-    questionType: difficulty === difficulties.EASY ? FORMAT1 : customType,
+    questionFormat: difficulty === difficulties.EASY ? FORMAT1 : customType,
+    questionType: THREE_PART_EQUATION,
     status: statusTypes.UNANSWERED,
   });
 }
@@ -124,7 +126,8 @@ function generateSubtractionQuesion(difficulty) {
     method: SUBTRACT,
     answer,
     startTime: Date.now(),
-    questionType: difficulty === difficulties.EASY ? FORMAT1 : customType,
+    questionFormat: difficulty === difficulties.EASY ? FORMAT1 : customType,
+    questionType: THREE_PART_EQUATION,
     status: statusTypes.UNANSWERED,
   });
 }
@@ -154,25 +157,25 @@ export const generateQuestion = () => (dispatch, getState) => {
   dispatch({ type: actionTypes.SET_CURRENT_QUESTION, question });
 };
 
-export const answerQuestion = (question, answer) => (dispatch, getState) => {
+function answerThreePartEquation(question, answer) {
   let status;
   answer = Number(answer);
-  const gameType = getState().getIn(['questions', 'gameType']);
+  const gameType = store.getState().getIn(['questions', 'gameType']);
   const isPractice = gameType === PRACTICE;
   const reducer = isPractice === true ? 'practice' : 'challenge';
-  const currentQuestion = getState().getIn([reducer, 'currentQuestion']);
-  const questionCount = getState().getIn([reducer, 'questionCount']);
-  switch(question.get('questionType')) {
+  const currentQuestion = store.getState().getIn([reducer, 'currentQuestion']);
+  const questionCount = store.getState().getIn([reducer, 'questionCount']);
+  switch(question.get('questionFormat')) {
     case FORMAT1:
       status = question.get('answer') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
       break;
 
     case FORMAT2:
-      status = question.get('qValue1') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
+      status = question.get('qValue2') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
       break;
 
     case FORMAT3:
-      status = question.get('qValue2') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
+      status = question.get('qValue1') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
       break;
 
     default:
@@ -189,16 +192,32 @@ export const answerQuestion = (question, answer) => (dispatch, getState) => {
   question = question.set('duration', question.get('endTime') - question.get('startTime'));
   question = question.set('message', message);
 
-  dispatch({ type: actionTypes.SET_CURRENT_QUESTION, question });
+  store.dispatch({ type: actionTypes.SET_CURRENT_QUESTION, question });
 
   if(gameType === CHALLENGE) {
-    dispatch({ type: actionTypes.ADD_QUESTION_TO_CHALLENGE, question, gameType });
+    store.dispatch({ type: actionTypes.ADD_QUESTION_TO_CHALLENGE, question, gameType });
     if(currentQuestion === questionCount) {
-     return dispatch(endChallenge());
+      store.dispatch(endChallenge());
+      return;
     }
-    dispatch({ type: actionTypes.INCREMENT_CURRENT_QUESTION });
+    store.dispatch({ type: actionTypes.INCREMENT_CURRENT_QUESTION });
   } else {
-    dispatch({ type: actionTypes.ADD_QUESTION_TO_HISTORY, question, gameType });
+    store.dispatch({ type: actionTypes.ADD_QUESTION_TO_HISTORY, question, gameType });
+  }
+}
+
+export function answerNumberStructureQuestion(question, answer) {
+  
+}
+
+export const answerQuestion = (question, answer) => (dispatch, getState) => {
+  switch(question.get('questionType')) {
+    case THREE_PART_EQUATION:
+      answerThreePartEquation(question, answer);
+      break;
+    case NUMBER_STRUCTURE:
+      answerNumberStructureQuestion(question, answer);
+      break;
   }
 
 };
