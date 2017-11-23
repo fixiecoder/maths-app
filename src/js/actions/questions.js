@@ -58,6 +58,7 @@ function generateMultiplicationQuestion(difficulty) {
   }
 
   const customType = [FORMAT1, FORMAT3][getRandomNumberBetween(0, 1)];
+
   const val2Index = table ? getRandomNumberBetween(0, table.getIn(['factors', 'qV2']).size - 1) : 0;
   const qValue1 = table.getIn(['factors', 'qV2', val2Index]);
   const factor = qValue1;
@@ -67,6 +68,9 @@ function generateMultiplicationQuestion(difficulty) {
   store.dispatch({ type: removeFactorActionType, table: table.get('key'), factor, factorType });
 
   const answer = qValue2 * qValue1;
+
+  console.log(customType, qValue2, qValue1, 'answer:', answer);
+
   return Map({
     questionRef: uuid.v4(),
     qValue1,
@@ -167,11 +171,11 @@ function answerThreePartEquation(question, answer) {
       break;
 
     case FORMAT2:
-      status = question.get('qValue1') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
+      status = question.get('qValue2') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
       break;
 
     case FORMAT3:
-      status = question.get('qValue2') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
+      status = question.get('qValue1') === answer ? statusTypes.CORRECT : statusTypes.INCORRECT;
       break;
 
     default:
